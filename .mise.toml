@@ -1,0 +1,53 @@
+[env]
+_.path = './node_modules/.bin'
+_.source = ".secret.sh"
+
+[tools]
+node = "24.21.0"
+pnpm = "12.5.1"
+glow = "3.0.0"
+
+[tasks.lint]
+run ="pnpm run lint"
+
+[tasks.format]
+run ="pnpm run format"
+
+[tasks.check]
+run ="pnpm run check"
+
+[tasks.lint-pkg]
+run = "pnpm run lint:pkg"
+
+[tasks.publish-to-npmjs]
+description = "Publish the package to npmjs"
+run = """
+#!/usr/bin/env bash
+set -euo pipefail
+npm whoami
+pnpm publish
+"""
+
+[[hooks.enter]]
+shell = "zsh"
+script = [
+  "unalias epub-to-markdown 2>/dev/null || true",
+  "epub-to-markdown() { node {{config_root | quote}}/src/cli.js \"$@\"; }",
+  "source <(SHELL=/bin/zsh node {{config_root | quote}}/src/cli.js completion)",
+]
+
+[[hooks.enter]]
+shell = "bash"
+script = [
+  "unalias epub-to-markdown 2>/dev/null || true",
+  "epub-to-markdown() { node {{config_root | quote}}/src/cli.js \"$@\"; }",
+  "source <(SHELL=/bin/bash node {{config_root | quote}}/src/cli.js completion)",
+]
+
+[[hooks.leave]]
+shell = "zsh"
+script = "unalias epub-to-markdown 2>/dev/null || true; unfunction epub-to-markdown 2>/dev/null; unfunction _epub-to-markdown_yargs_completions 2>/dev/null; compdef -d epub-to-markdown 2>/dev/null"
+
+[[hooks.leave]]
+shell = "bash"
+script = "unalias epub-to-markdown 2>/dev/null || true; unset -f epub-to-markdown 2>/dev/null; complete -r epub-to-markdown 2>/dev/null"

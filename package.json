@@ -1,0 +1,46 @@
+{
+  "name": "@stephane-klein/epub-to-markdown",
+  "version": "0.1.0",
+  "description": "Generate a YAML table of contents and split an EPUB book into Markdown files.",
+  "license": "MIT",
+  "author": "Stéphane Klein <contact@stephane-klein.info>",
+  "files": [
+    "src"
+  ],
+  "bin": {
+    "epub-to-markdown": "src/cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stephane-klein/epub-to-markdown.git"
+  },
+  "type": "module",
+  "scripts": {
+    "epub-to-markdown": "node src/cli.js",
+    "test": "node --test",
+    "check": "biome check --write",
+    "format": "biome format --write",
+    "lint": "biome lint",
+    "lint:pkg": "pnpm npmPkgJsonLint ."
+  },
+  "dependencies": {
+    "@ai-sdk/openai-compatible": "~3.0.53",
+    "ai": "~7.0.107",
+    "fast-xml-parser": "~5.11.1",
+    "fflate": "~0.8.3",
+    "listr2": "~11.1.0",
+    "turndown": "~7.2.4",
+    "yaml": "~2.9.1",
+    "yargs": "~18.2.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "~2.5.14",
+    "npm-package-json-lint": "~11.0.0"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

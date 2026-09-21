@@ -1,0 +1,2 @@
+minimumReleaseAgeExclude:
+  - yargs@18.2.0

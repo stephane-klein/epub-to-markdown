@@ -1,0 +1,2 @@
+model_id: deepseek-flash
+openaiapi_endpoint: https://api.deepseek.com/chat/completions
