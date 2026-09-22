@@ -330,6 +330,7 @@ $ mise run publish-to-npmjs
 `npm login` authenticates against npmjs, once per machine. `pnpm version patch`
 bumps the version and creates the matching git tag (use `minor` or `major` for
 larger changes). `mise run publish-to-npmjs` first checks the authentication with
-`npm whoami`, then runs `pnpm publish`; it publishes the version written in
+`npm whoami`, then runs `npm publish`, which prompts for two-factor
+authentication in the browser; it publishes the version written in
 `package.json`, so bump it first. The package is scoped, so `publishConfig` in
 `package.json` forces public access.

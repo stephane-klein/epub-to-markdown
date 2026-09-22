@@ -25,7 +25,7 @@ run = """
 #!/usr/bin/env bash
 set -euo pipefail
 npm whoami
-pnpm publish
+npm publish
 """
 
 [[hooks.enter]]
