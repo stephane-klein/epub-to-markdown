@@ -55,7 +55,7 @@ export const stripLeadingTitle = (html, anchor, entriesByAnchor) => {
     return html.slice(0, first.index) + html.slice(tail);
 };
 
-const flattenToc = (nodes, depth = 1) =>
+export const flattenToc = (nodes, depth = 1) =>
     nodes.flatMap((node) => {
         const children = node.children ?? [];
         return [

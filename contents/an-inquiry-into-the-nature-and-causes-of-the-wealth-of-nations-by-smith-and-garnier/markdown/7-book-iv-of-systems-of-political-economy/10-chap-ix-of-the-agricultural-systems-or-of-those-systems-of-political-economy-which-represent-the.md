@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chap. IX - Of the agricultural systems, or of those systems of political economy which represent the produce of land, as either the sole or the principal source of the revenue and wealth of every country
 path: 7-book-iv-of-systems-of-political-economy/10-chap-ix-of-the-agricultural-systems-or-of-those-systems-of-political-economy-which-represent-the
 href: 5682792182066254284_38194-h-7.htm.xhtml#pgepubid00412

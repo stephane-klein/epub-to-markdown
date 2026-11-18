@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chap. I - Of the principle of the commercial or mercantile system
 path: 7-book-iv-of-systems-of-political-economy/02-chap-i-of-the-principle-of-the-commercial-or-mercantile-system
 href: 5682792182066254284_38194-h-5.htm.xhtml#pgepubid00286

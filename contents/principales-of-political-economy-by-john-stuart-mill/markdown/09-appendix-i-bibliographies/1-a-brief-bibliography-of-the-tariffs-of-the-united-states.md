@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: A Brief Bibliography Of The Tariffs Of The United States.
 path: 09-appendix-i-bibliographies/1-a-brief-bibliography-of-the-tariffs-of-the-united-states
 href: 1129008759595750428_30107-h-11.html.xhtml#pgepubid00277

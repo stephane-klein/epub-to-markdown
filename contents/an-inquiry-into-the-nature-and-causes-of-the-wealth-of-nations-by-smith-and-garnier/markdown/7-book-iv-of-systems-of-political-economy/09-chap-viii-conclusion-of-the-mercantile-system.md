@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chap. VIII - Conclusion of the mercantile system
 path: 7-book-iv-of-systems-of-political-economy/09-chap-viii-conclusion-of-the-mercantile-system
 href: 5682792182066254284_38194-h-7.htm.xhtml#pgepubid00401

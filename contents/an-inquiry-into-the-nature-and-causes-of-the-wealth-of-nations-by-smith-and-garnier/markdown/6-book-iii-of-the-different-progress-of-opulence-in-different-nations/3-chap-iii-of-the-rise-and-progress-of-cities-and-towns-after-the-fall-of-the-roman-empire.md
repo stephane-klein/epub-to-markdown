@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chap. III - Of the rise and progress of cities and towns, after the fall of the Roman empire
 path: 6-book-iii-of-the-different-progress-of-opulence-in-different-nations/3-chap-iii-of-the-rise-and-progress-of-cities-and-towns-after-the-fall-of-the-roman-empire
 href: 5682792182066254284_38194-h-4.htm.xhtml#pgepubid00268

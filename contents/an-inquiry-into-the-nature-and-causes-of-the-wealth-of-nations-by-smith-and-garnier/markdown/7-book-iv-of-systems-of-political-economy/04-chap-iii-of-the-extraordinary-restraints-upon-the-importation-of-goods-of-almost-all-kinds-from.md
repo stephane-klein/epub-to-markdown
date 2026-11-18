@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chap. III - Of the extraordinary restraints upon the importation of goods of almost all kinds, from those countries with which the balance is supposed to be disadvantageous
 path: 7-book-iv-of-systems-of-political-economy/04-chap-iii-of-the-extraordinary-restraints-upon-the-importation-of-goods-of-almost-all-kinds-from
 href: 5682792182066254284_38194-h-5.htm.xhtml#pgepubid00309

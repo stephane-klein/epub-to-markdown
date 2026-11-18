@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Charts.
 path: 12-charts
 href: 1129008759595750428_30107-h-11.html.xhtml#pgepubid00282

@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: An account of busses fitted out in Scotland for eleven years, with the number of empty barrels carried out, and the number of barrels of herrings caught; also the bounty, at a medium, on each barrel of sea-sticks, and on each barrel when fully packed
 path: 7-book-iv-of-systems-of-political-economy/11-an-account-of-busses-fitted-out-in-scotland-for-eleven-years-with-the-number-of-empty-barrels
 href: 5682792182066254284_38194-h-7.htm.xhtml#pgepubid00427

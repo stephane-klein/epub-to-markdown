@@ -42,6 +42,7 @@ Commands:
                             of an EPUB file
   generate-markdown <epub>  Split the EPUB content into Markdown files following
                             config.yaml
+  migrate <book>            Upgrade a book Markdown corpus to the latest schema
   doctor                    Check the runtime and the LLM access
   completion                Generate a shell completion script for bash or zsh
 
@@ -271,6 +272,7 @@ A section file holds its body:
 
 ```markdown
 ---
+epub_to_markdown_schema: 1
 title: Chapter I. Of The Requisites Of Production.
 path: 04-book-i-production/01-chapter-i-of-the-requisites-of-production
 href: OEBPS/book-i.xhtml#pgepubid00007
@@ -289,6 +291,7 @@ A parent that sits above `max_split_depth` has no body to render, so its
 
 ```markdown
 ---
+epub_to_markdown_schema: 1
 title: Book I. Production.
 path: 04-book-i-production
 href: OEBPS/book-i.xhtml#pgepubid00006
@@ -309,6 +312,31 @@ Footnote references are replaced by Markdown footnotes (`[^12]`), and the note
 text is written at the end of the same file (`[^12]: ...`), even when the note
 is defined in another document. Note blocks that leaked into the body are
 removed; a dedicated `Notes` or `Footnotes` section is kept as is.
+
+## Schema version and migration
+
+Every Markdown file starts with `epub_to_markdown_schema: 1`. The number
+describes the frontmatter and tree contract, not the package version. A file
+without the field is schema `0`.
+
+`generate-markdown` always writes the latest schema. The tools that consume the
+corpus support only the latest schema.
+
+`migrate` upgrades an existing book in place when the change only touches files.
+It reads `config.yaml`, `toc.yaml` and `markdown/`, never the EPUB, and never
+re-renders the body:
+
+```bash
+$ epub-to-markdown migrate contents/my-book
+$ epub-to-markdown migrate contents/my-book --dry-run
+```
+
+For schema `0` to `1`, it creates the missing `00-index.md` pages, removes the
+`ancestors` frontmatter and adds the schema field. The body does not change, so
+the content hashes and the embeddings stay valid.
+
+A migration that changes the body is not supported in place. The command stops
+and tells you to run `generate-markdown` from the EPUB instead.
 
 ## Set up the development environment
 

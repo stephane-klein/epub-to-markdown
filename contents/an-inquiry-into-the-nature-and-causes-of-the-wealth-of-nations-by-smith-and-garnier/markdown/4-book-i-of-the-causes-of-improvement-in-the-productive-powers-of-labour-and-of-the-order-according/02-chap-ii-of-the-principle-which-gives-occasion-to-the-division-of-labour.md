@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chap. II - Of the principle which gives occasion to the division of labour
 path: 4-book-i-of-the-causes-of-improvement-in-the-productive-powers-of-labour-and-of-the-order-according/02-chap-ii-of-the-principle-which-gives-occasion-to-the-division-of-labour
 href: 5682792182066254284_38194-h-0.htm.xhtml#pgepubid00060

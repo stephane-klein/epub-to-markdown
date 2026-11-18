@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chapter XIV. Of International Values.
 path: 06-book-iii-exchange/14-chapter-xiv-of-international-values
 href: 1129008759595750428_30107-h-7.html.xhtml#pgepubid00166

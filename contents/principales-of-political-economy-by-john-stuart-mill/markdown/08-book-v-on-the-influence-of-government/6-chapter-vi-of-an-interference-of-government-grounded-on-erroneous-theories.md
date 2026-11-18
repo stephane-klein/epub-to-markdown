@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chapter VI. Of An Interference Of Government Grounded On Erroneous Theories.
 path: 08-book-v-on-the-influence-of-government/6-chapter-vi-of-an-interference-of-government-grounded-on-erroneous-theories
 href: 1129008759595750428_30107-h-10.html.xhtml#pgepubid00268

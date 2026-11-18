@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chap. VI - Of the component part of the price of commodities
 path: 4-book-i-of-the-causes-of-improvement-in-the-productive-powers-of-labour-and-of-the-order-according/06-chap-vi-of-the-component-part-of-the-price-of-commodities
 href: 5682792182066254284_38194-h-1.htm.xhtml#pgepubid00082

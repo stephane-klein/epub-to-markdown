@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chapter V. Of A National Debt.
 path: 08-book-v-on-the-influence-of-government/5-chapter-v-of-a-national-debt
 href: 1129008759595750428_30107-h-10.html.xhtml#pgepubid00264

@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chap. V - Of the real and nominal price of commodities, or of their price in labour, and their price in money
 path: 4-book-i-of-the-causes-of-improvement-in-the-productive-powers-of-labour-and-of-the-order-according/05-chap-v-of-the-real-and-nominal-price-of-commodities-or-of-their-price-in-labour-and-their-price-in
 href: 5682792182066254284_38194-h-0.htm.xhtml#pgepubid00072

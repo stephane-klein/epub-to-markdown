@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chap. IV - Of the origin and use of money
 path: 4-book-i-of-the-causes-of-improvement-in-the-productive-powers-of-labour-and-of-the-order-according/04-chap-iv-of-the-origin-and-use-of-money
 href: 5682792182066254284_38194-h-0.htm.xhtml#pgepubid00067

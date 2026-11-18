@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chapter XIX. Of The Rate Of Interest.
 path: 06-book-iii-exchange/19-chapter-xix-of-the-rate-of-interest
 href: 1129008759595750428_30107-h-8.html.xhtml#pgepubid00187

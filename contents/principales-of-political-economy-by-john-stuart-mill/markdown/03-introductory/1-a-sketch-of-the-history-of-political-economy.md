@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: A Sketch Of The History Of Political Economy.
 path: 03-introductory/1-a-sketch-of-the-history-of-political-economy
 href: 1129008759595750428_30107-h-2.html.xhtml#pgepubid00003

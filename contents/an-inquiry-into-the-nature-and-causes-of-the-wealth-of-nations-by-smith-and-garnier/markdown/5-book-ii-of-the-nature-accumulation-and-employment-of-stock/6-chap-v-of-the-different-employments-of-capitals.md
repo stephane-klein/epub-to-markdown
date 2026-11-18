@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chap. V - Of the different employments of capitals
 path: 5-book-ii-of-the-nature-accumulation-and-employment-of-stock/6-chap-v-of-the-different-employments-of-capitals
 href: 5682792182066254284_38194-h-4.htm.xhtml#pgepubid00245

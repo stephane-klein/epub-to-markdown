@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chapter IV. Consequences Of The Tendency Of Profits To A Minimum, And The Stationary State.
 path: 07-book-iv-influence-of-the-progress-of-society-on-production-and-distribution/4-chapter-iv-consequences-of-the-tendency-of-profits-to-a-minimum-and-the-stationary-state
 href: 1129008759595750428_30107-h-9.html.xhtml#pgepubid00224

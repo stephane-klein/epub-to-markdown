@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chapter XVI. Of The Foreign Exchanges.
 path: 06-book-iii-exchange/16-chapter-xvi-of-the-foreign-exchanges
 href: 1129008759595750428_30107-h-7.html.xhtml#pgepubid00175

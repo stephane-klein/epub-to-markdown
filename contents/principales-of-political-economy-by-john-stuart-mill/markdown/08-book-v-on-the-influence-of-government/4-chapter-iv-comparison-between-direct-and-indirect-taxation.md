@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chapter IV. Comparison Between Direct And Indirect Taxation.
 path: 08-book-v-on-the-influence-of-government/4-chapter-iv-comparison-between-direct-and-indirect-taxation
 href: 1129008759595750428_30107-h-10.html.xhtml#pgepubid00258

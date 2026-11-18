@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Method of facilitating the study of Dr. Smith's work
 path: 2-short-view-of-the-doctrine-of-smith-compared-with-that-of-the-french-economists/1-method-of-facilitating-the-study-of-dr-smith-s-work
 href: 5682792182066254284_38194-h-0.htm.xhtml#pgepubid00035

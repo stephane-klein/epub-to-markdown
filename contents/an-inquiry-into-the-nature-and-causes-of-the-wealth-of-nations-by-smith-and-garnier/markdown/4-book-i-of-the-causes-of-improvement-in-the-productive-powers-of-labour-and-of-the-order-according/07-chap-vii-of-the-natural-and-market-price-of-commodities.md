@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chap. VII - Of the natural and market price of commodities
 path: 4-book-i-of-the-causes-of-improvement-in-the-productive-powers-of-labour-and-of-the-order-according/07-chap-vii-of-the-natural-and-market-price-of-commodities
 href: 5682792182066254284_38194-h-1.htm.xhtml#pgepubid00087

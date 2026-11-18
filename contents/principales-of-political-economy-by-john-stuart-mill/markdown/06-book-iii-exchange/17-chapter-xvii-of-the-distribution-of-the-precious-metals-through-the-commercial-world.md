@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chapter XVII. Of The Distribution Of The Precious Metals Through The Commercial World.
 path: 06-book-iii-exchange/17-chapter-xvii-of-the-distribution-of-the-precious-metals-through-the-commercial-world
 href: 1129008759595750428_30107-h-7.html.xhtml#pgepubid00178

@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chap. II - Of the sources of the general or public revenue of the society
 path: 8-book-v-of-the-revenue-of-the-sovereign-or-commonwealth/2-chap-ii-of-the-sources-of-the-general-or-public-revenue-of-the-society
 href: 5682792182066254284_38194-h-9.htm.xhtml#pgepubid00495

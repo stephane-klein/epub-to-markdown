@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chap. XI - Of the rent of land
 path: 4-book-i-of-the-causes-of-improvement-in-the-productive-powers-of-labour-and-of-the-order-according/11-chap-xi-of-the-rent-of-land
 href: 5682792182066254284_38194-h-2.htm.xhtml#pgepubid00134

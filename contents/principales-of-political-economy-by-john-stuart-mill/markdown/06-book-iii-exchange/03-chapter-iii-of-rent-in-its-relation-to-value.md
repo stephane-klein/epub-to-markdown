@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chapter III. Of Rent, In Its Relation To Value.
 path: 06-book-iii-exchange/03-chapter-iii-of-rent-in-its-relation-to-value
 href: 1129008759595750428_30107-h-5.html.xhtml#pgepubid00109

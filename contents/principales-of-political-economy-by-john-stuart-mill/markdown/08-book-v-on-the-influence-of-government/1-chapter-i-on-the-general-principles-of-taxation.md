@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chapter I. On The General Principles Of Taxation.
 path: 08-book-v-on-the-influence-of-government/1-chapter-i-on-the-general-principles-of-taxation
 href: 1129008759595750428_30107-h-10.html.xhtml#pgepubid00237

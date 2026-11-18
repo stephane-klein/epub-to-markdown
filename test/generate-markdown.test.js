@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { directoryPathsOf, indexOutputPath, sectionOutputPath } from "../src/generate-markdown.js";
+import { directoryPathsOf, frontmatterFor, indexOutputPath, sectionOutputPath } from "../src/generate-markdown.js";
+import { MARKDOWN_SCHEMA_VERSION } from "../src/schema.js";
 
 const sections = (...paths) => paths.map((path) => ({ entry: { path } }));
 
@@ -26,4 +27,15 @@ test("sectionOutputPath writes a directory entry as 00-index.md", () => {
 
 test("indexOutputPath writes a parent entry as 00-index.md", () => {
     assert.equal(indexOutputPath("/out", "2-intro"), "/out/2-intro/00-index.md");
+});
+
+test("frontmatterFor puts the schema version first", () => {
+    const frontmatter = frontmatterFor(
+        { title: "Chapter One", path: "02-book-one/01-chapter-one", href: "book.xhtml#ch1" },
+        "book.epub",
+    );
+
+    assert.equal(MARKDOWN_SCHEMA_VERSION, 1);
+    assert.deepEqual(Object.keys(frontmatter), ["epub_to_markdown_schema", "title", "path", "href", "source"]);
+    assert.equal(frontmatter.epub_to_markdown_schema, MARKDOWN_SCHEMA_VERSION);
 });

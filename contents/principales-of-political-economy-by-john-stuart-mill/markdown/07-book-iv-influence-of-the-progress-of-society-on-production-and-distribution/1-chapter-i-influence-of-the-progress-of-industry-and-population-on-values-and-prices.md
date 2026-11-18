@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chapter I. Influence Of The Progress Of Industry And Population On Values And Prices.
 path: 07-book-iv-influence-of-the-progress-of-society-on-production-and-distribution/1-chapter-i-influence-of-the-progress-of-industry-and-population-on-values-and-prices
 href: 1129008759595750428_30107-h-9.html.xhtml#pgepubid00204

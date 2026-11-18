@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chap. II - Of the discouragement of agriculture in the ancient state of Europe, after the fall of the Roman empire
 path: 6-book-iii-of-the-different-progress-of-opulence-in-different-nations/2-chap-ii-of-the-discouragement-of-agriculture-in-the-ancient-state-of-europe-after-the-fall-of-the
 href: 5682792182066254284_38194-h-4.htm.xhtml#pgepubid00261

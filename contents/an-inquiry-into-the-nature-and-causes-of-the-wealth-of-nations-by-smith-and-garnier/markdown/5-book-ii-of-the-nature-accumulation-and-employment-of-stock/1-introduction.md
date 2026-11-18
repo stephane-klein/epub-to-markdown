@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Introduction
 path: 5-book-ii-of-the-nature-accumulation-and-employment-of-stock/1-introduction
 href: 5682792182066254284_38194-h-3.htm.xhtml#pgepubid00200

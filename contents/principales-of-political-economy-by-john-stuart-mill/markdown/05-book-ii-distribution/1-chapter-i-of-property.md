@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chapter I. Of Property.
 path: 05-book-ii-distribution/1-chapter-i-of-property
 href: 1129008759595750428_30107-h-4.html.xhtml#pgepubid00056

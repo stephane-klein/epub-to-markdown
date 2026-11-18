@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: A Brief Bibliography Of Bimetallism.
 path: 09-appendix-i-bibliographies/2-a-brief-bibliography-of-bimetallism
 href: 1129008759595750428_30107-h-11.html.xhtml#pgepubid00278

@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chapter II. Ultimate Analysis Of Cost Of Production.
 path: 06-book-iii-exchange/02-chapter-ii-ultimate-analysis-of-cost-of-production
 href: 1129008759595750428_30107-h-5.html.xhtml#pgepubid00102

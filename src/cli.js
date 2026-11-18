@@ -6,6 +6,7 @@ import { hideBin } from "yargs/helpers";
 import { runDoctor } from "./doctor.js";
 import { runGenerateMarkdown } from "./generate-markdown.js";
 import { runGenerateToc } from "./generate-toc.js";
+import { runMigrate } from "./migrate.js";
 
 const { version } = createRequire(import.meta.url)("../package.json");
 
@@ -89,6 +90,23 @@ const cli = yargs(hideBin(process.argv))
         "Split the EPUB content into Markdown files following config.yaml",
         epubPositional,
         handle((argv) => runGenerateMarkdown({ epubPath: argv.epub })),
+    )
+    .command(
+        "migrate <book>",
+        "Upgrade a book Markdown corpus to the latest schema",
+        (yargs) =>
+            yargs
+                .positional("book", {
+                    describe: "Path to the book directory or its EPUB file",
+                    type: "string",
+                    demandOption: true,
+                })
+                .option("dry-run", {
+                    describe: "Report the changes without writing them",
+                    type: "boolean",
+                    default: false,
+                }),
+        handle((argv) => runMigrate({ bookDir: argv.book, dryRun: argv.dryRun })),
     )
     .command(
         "doctor",

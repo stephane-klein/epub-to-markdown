@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chap. VI - Of treaties of commerce
 path: 7-book-iv-of-systems-of-political-economy/07-chap-vi-of-treaties-of-commerce
 href: 5682792182066254284_38194-h-6.htm.xhtml#pgepubid00348

@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chap. IV - Of stock lent at interest
 path: 5-book-ii-of-the-nature-accumulation-and-employment-of-stock/5-chap-iv-of-stock-lent-at-interest
 href: 5682792182066254284_38194-h-4.htm.xhtml#pgepubid00240

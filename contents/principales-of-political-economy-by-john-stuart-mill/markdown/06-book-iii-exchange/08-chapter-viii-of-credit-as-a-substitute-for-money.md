@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chapter VIII. Of Credit, As A Substitute For Money.
 path: 06-book-iii-exchange/08-chapter-viii-of-credit-as-a-substitute-for-money
 href: 1129008759595750428_30107-h-6.html.xhtml#pgepubid00131

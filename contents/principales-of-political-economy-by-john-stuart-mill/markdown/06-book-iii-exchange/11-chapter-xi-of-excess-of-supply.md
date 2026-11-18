@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chapter XI. Of Excess Of Supply.
 path: 06-book-iii-exchange/11-chapter-xi-of-excess-of-supply
 href: 1129008759595750428_30107-h-7.html.xhtml#pgepubid00152

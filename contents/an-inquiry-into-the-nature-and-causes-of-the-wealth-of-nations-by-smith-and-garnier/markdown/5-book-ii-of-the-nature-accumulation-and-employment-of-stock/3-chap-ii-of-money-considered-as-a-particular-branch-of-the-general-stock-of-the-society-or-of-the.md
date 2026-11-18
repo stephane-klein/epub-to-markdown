@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chap. II - Of money, considered as a particular branch of the general stock of the society, or of the expense of maintaining the national capital
 path: 5-book-ii-of-the-nature-accumulation-and-employment-of-stock/3-chap-ii-of-money-considered-as-a-particular-branch-of-the-general-stock-of-the-society-or-of-the
 href: 5682792182066254284_38194-h-3.htm.xhtml#pgepubid00207

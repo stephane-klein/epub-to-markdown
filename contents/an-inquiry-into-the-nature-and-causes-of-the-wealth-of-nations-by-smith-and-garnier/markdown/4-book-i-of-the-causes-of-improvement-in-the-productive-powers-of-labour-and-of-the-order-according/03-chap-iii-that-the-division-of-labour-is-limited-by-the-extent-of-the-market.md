@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chap. III - That the division of labour is limited by the extent of the market
 path: 4-book-i-of-the-causes-of-improvement-in-the-productive-powers-of-labour-and-of-the-order-according/03-chap-iii-that-the-division-of-labour-is-limited-by-the-extent-of-the-market
 href: 5682792182066254284_38194-h-0.htm.xhtml#pgepubid00064

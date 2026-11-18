@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chapter IV. Of Money.
 path: 06-book-iii-exchange/04-chapter-iv-of-money
 href: 1129008759595750428_30107-h-5.html.xhtml#pgepubid00114

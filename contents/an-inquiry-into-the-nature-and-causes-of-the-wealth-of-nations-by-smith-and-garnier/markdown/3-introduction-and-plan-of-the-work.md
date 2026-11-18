@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Introduction and plan of the work
 path: 3-introduction-and-plan-of-the-work
 href: 5682792182066254284_38194-h-0.htm.xhtml#pgepubid00050

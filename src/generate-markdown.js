@@ -7,6 +7,7 @@ import { ensureBookTitle, loadBookConfig } from "./book-config.js";
 import { readEpub } from "./epub.js";
 import { collectFootnotes, createFootnoteTracker } from "./footnotes.js";
 import { htmlToMarkdown } from "./markdown.js";
+import { MARKDOWN_SCHEMA_VERSION } from "./schema.js";
 import { splitIntoSections, stripLeadingTitle } from "./split.js";
 
 const clampHeadingLevel = (level) => Math.max(1, Math.min(6, level));
@@ -52,7 +53,8 @@ const imageResolver = (epub, images) => (src) => {
     return `images/${images.get(src)}`;
 };
 
-const frontmatterFor = (entry, source) => ({
+export const frontmatterFor = (entry, source) => ({
+    epub_to_markdown_schema: MARKDOWN_SCHEMA_VERSION,
     title: entry.title,
     path: entry.path,
     href: entry.href,

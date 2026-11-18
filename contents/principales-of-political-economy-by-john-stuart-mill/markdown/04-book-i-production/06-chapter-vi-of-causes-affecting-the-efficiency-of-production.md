@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chapter VI. Of Causes Affecting The Efficiency Of Production.
 path: 04-book-i-production/06-chapter-vi-of-causes-affecting-the-efficiency-of-production
 href: 1129008759595750428_30107-h-3.html.xhtml#pgepubid00030

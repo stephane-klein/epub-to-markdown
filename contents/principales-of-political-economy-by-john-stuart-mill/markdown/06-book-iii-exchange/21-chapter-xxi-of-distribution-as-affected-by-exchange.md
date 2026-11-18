@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chapter XXI. Of Distribution, As Affected By Exchange.
 path: 06-book-iii-exchange/21-chapter-xxi-of-distribution-as-affected-by-exchange
 href: 1129008759595750428_30107-h-8.html.xhtml#pgepubid00199

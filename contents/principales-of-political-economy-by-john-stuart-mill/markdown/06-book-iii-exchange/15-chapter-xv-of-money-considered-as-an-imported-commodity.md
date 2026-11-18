@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chapter XV. Of Money Considered As An Imported Commodity.
 path: 06-book-iii-exchange/15-chapter-xv-of-money-considered-as-an-imported-commodity
 href: 1129008759595750428_30107-h-7.html.xhtml#pgepubid00172

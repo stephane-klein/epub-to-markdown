@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chapter XVIII. Influence Of The Currency On The Exchanges And On Foreign Trade.
 path: 06-book-iii-exchange/18-chapter-xviii-influence-of-the-currency-on-the-exchanges-and-on-foreign-trade
 href: 1129008759595750428_30107-h-8.html.xhtml#pgepubid00183

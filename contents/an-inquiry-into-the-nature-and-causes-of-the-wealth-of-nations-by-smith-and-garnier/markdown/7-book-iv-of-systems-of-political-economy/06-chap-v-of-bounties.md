@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chap. V - Of bounties
 path: 7-book-iv-of-systems-of-political-economy/06-chap-v-of-bounties
 href: 5682792182066254284_38194-h-5.htm.xhtml#pgepubid00328

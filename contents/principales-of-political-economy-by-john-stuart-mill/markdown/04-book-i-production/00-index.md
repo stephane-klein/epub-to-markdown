@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Book I. Production.
 path: 04-book-i-production
 href: 1129008759595750428_30107-h-3.html.xhtml#pgepubid00006

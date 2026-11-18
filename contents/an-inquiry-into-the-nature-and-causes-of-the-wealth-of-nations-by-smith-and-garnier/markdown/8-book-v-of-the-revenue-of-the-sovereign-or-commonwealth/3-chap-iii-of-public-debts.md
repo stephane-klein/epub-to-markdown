@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chap. III - Of public debts
 path: 8-book-v-of-the-revenue-of-the-sovereign-or-commonwealth/3-chap-iii-of-public-debts
 href: 5682792182066254284_38194-h-10.htm.xhtml#pgepubid00551

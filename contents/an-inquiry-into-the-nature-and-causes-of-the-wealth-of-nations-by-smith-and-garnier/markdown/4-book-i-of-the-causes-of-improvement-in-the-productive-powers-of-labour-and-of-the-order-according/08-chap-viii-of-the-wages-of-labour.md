@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chap. VIII - Of the wages of labour
 path: 4-book-i-of-the-causes-of-improvement-in-the-productive-powers-of-labour-and-of-the-order-according/08-chap-viii-of-the-wages-of-labour
 href: 5682792182066254284_38194-h-1.htm.xhtml#pgepubid00093

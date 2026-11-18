@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Short account of the life and writings of Dr. Adam Smith
 path: 1-short-account-of-the-life-and-writings-of-dr-adam-smith
 href: 5682792182066254284_38194-h-0.htm.xhtml#pgepubid00009

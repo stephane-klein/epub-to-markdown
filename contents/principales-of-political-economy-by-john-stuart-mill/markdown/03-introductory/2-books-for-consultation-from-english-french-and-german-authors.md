@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Books For Consultation (From English, French, And German Authors).
 path: 03-introductory/2-books-for-consultation-from-english-french-and-german-authors
 href: 1129008759595750428_30107-h-2.html.xhtml#pgepubid00004

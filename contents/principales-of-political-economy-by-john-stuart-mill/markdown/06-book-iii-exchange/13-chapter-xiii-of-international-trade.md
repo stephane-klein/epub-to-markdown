@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chapter XIII. Of International Trade.
 path: 06-book-iii-exchange/13-chapter-xiii-of-international-trade
 href: 1129008759595750428_30107-h-7.html.xhtml#pgepubid00160

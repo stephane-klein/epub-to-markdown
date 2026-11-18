@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Contents
 path: 01-contents
 href: 1129008759595750428_30107-h-1.html.xhtml#pgepubid00000

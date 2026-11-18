@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chapter V. Of The Value Of Money, As Dependent On Demand And Supply.
 path: 06-book-iii-exchange/05-chapter-v-of-the-value-of-money-as-dependent-on-demand-and-supply
 href: 1129008759595750428_30107-h-5.html.xhtml#pgepubid00118

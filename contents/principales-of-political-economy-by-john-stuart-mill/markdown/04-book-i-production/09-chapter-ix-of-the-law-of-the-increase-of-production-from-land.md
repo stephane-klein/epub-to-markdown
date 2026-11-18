@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chapter IX. Of The Law Of The Increase Of Production From Land.
 path: 04-book-i-production/09-chapter-ix-of-the-law-of-the-increase-of-production-from-land
 href: 1129008759595750428_30107-h-3.html.xhtml#pgepubid00044

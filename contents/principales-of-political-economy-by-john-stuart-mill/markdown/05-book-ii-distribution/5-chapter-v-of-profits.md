@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chapter V. Of Profits.
 path: 05-book-ii-distribution/5-chapter-v-of-profits
 href: 1129008759595750428_30107-h-4.html.xhtml#pgepubid00081

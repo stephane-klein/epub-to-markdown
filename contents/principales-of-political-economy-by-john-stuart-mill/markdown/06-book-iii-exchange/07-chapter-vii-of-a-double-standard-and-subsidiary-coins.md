@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chapter VII. Of A Double Standard And Subsidiary Coins.
 path: 06-book-iii-exchange/07-chapter-vii-of-a-double-standard-and-subsidiary-coins
 href: 1129008759595750428_30107-h-6.html.xhtml#pgepubid00127

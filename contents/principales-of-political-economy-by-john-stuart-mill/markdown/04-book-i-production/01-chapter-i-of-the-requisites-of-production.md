@@ -1,4 +1,5 @@
 ---
+epub_to_markdown_schema: 1
 title: Chapter I. Of The Requisites Of Production.
 path: 04-book-i-production/01-chapter-i-of-the-requisites-of-production
 href: 1129008759595750428_30107-h-3.html.xhtml#pgepubid00007
