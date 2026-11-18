@@ -100,7 +100,8 @@ $ epub-to-markdown generate-toc contents/my-book/my-book.epub
 
 The command writes a `toc.yaml` file next to the EPUB file. It reads the EPUB 3
 navigation document when present and falls back to the EPUB 2 NCX file, so it
-works with both EPUB versions.
+works with both EPUB versions. When a `config.yaml` already exists next to the
+EPUB and has no `title`, the command also writes the book title into it.
 
 Each entry has a `title`, a `slug` derived from the title, a `path` made of the
 parent slugs and the entry slug, and the `href` to the source document:
@@ -179,9 +180,16 @@ it).
 Add a `config.yaml` next to the EPUB to control the split granularity:
 
 ```yaml
+title: Principles of Political Economy
 max_split_depth: 2
 max_line_length: 120
 ```
+
+`title` is the book title at the root of the tree. `generate-markdown` copies it
+from the `title` of `toc.yaml` when the key is missing or empty, and
+`generate-toc` does the same when `config.yaml` already exists. A non-empty
+value is never overwritten. Downstream tools use this value as the first segment
+of every breadcrumb, so keep it unchanged once the corpus is indexed.
 
 `max_line_length` hard wraps paragraphs at the given column (default `120`). Set
 it to `0` to keep each paragraph on a single line. Code blocks, tables and

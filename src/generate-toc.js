@@ -1,7 +1,7 @@
 import { writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { stringify } from "yaml";
-import { loadProjectConfig } from "./book-config.js";
+import { ensureBookTitle, loadProjectConfig } from "./book-config.js";
 import { readEpub } from "./epub.js";
 import { extractHeadings } from "./headings.js";
 import { bookSession, createModel, estimateCost, generateOnce, metricsLine, parseRetryDelays } from "./llm.js";
@@ -21,9 +21,13 @@ export const runGenerateToc = async ({ epubPath, llm = false, cli = {} }) => {
     const epub = readEpub(epubPath);
     const { title, toc } = extractToc(epub);
     const outputPath = resolve(dir, "toc.yaml");
+    const bookConfigPath = resolve(dir, "config.yaml");
 
     if (!llm) {
         writeRawToc(outputPath, { title, toc });
+        if (ensureBookTitle(bookConfigPath, title)) {
+            console.log(`Title written to ${bookConfigPath}`);
+        }
         console.log(`TOC written to ${outputPath}`);
         return;
     }
@@ -108,6 +112,9 @@ export const runGenerateToc = async ({ epubPath, llm = false, cli = {} }) => {
         toc: annotateToc(toHrefToc(reviewed, idToHref)),
     };
     writeFileSync(outputPath, stringify(frontmatter, { lineWidth: 0 }));
+    if (ensureBookTitle(bookConfigPath, title)) {
+        console.log(`Title written to ${bookConfigPath}`);
+    }
 
     console.log(`TOC reviewed written to ${outputPath}`);
     console.error(metricsLine(settings.model, result.usage, result.elapsed, cost));

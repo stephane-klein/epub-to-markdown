@@ -3,7 +3,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { basename, dirname, posix, relative, resolve } from "node:path";
 import { Listr, ListrLogger, ProcessOutput } from "listr2";
 import { parse, stringify } from "yaml";
-import { loadBookConfig } from "./book-config.js";
+import { ensureBookTitle, loadBookConfig } from "./book-config.js";
 import { readEpub } from "./epub.js";
 import { collectFootnotes, createFootnoteTracker } from "./footnotes.js";
 import { htmlToMarkdown } from "./markdown.js";
@@ -117,9 +117,13 @@ export const runGenerateMarkdown = async ({ epubPath }) => {
         [
             {
                 title: "Load config and table of contents",
-                task: () => {
+                task: (_, task) => {
                     context.config = loadBookConfig(configPath);
-                    context.toc = parse(readFileSync(tocPath, "utf8")).toc;
+                    const toc = parse(readFileSync(tocPath, "utf8"));
+                    context.toc = toc.toc;
+                    if (ensureBookTitle(configPath, toc.title)) {
+                        task.output = "title written to config.yaml";
+                    }
                     context.epub = readEpub(epubPath);
                 },
             },

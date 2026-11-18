@@ -1,5 +1,5 @@
-import { existsSync, readFileSync } from "node:fs";
-import { parse } from "yaml";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { isMap, parse, parseDocument } from "yaml";
 
 export const loadProjectConfig = (configPath) => {
     if (!existsSync(configPath)) return {};
@@ -17,4 +17,31 @@ export const loadBookConfig = (configPath) => {
         throw new Error(`max_line_length must be a non-negative integer in ${configPath}`);
     }
     return { maxSplitDepth, maxLineLength };
+};
+
+export const ensureBookTitle = (configPath, title) => {
+    if (!existsSync(configPath)) return false;
+    if (typeof title !== "string" || title.trim() === "") return false;
+
+    const document = parseDocument(readFileSync(configPath, "utf8"));
+    const current = document.get("title");
+    if (current !== undefined && current !== null) {
+        if (typeof current !== "string") {
+            throw new Error(`title must be a string in ${configPath}`);
+        }
+        if (current.trim() !== "") return false;
+    }
+
+    if (document.has("title")) {
+        document.set("title", title);
+    } else if (document.contents === null) {
+        document.set("title", title);
+    } else if (isMap(document.contents)) {
+        document.contents.items.unshift(document.createPair("title", title));
+    } else {
+        throw new Error(`config.yaml must contain a YAML mapping: ${configPath}`);
+    }
+
+    writeFileSync(configPath, document.toString({ lineWidth: 0 }));
+    return true;
 };
