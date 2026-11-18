@@ -1,8 +1,6 @@
 ---
 title: Method of facilitating the study of Dr. Smith's work
 path: 2-short-view-of-the-doctrine-of-smith-compared-with-that-of-the-french-economists/1-method-of-facilitating-the-study-of-dr-smith-s-work
-ancestors:
-  - Short view of the doctrine of Smith, compared with that of the French economists
 href: 5682792182066254284_38194-h-0.htm.xhtml#pgepubid00035
 source: an-inquiry-into-the-nature-and-causes-of-the-wealth-of-nations-by-smith-and-garnier.epub
 ---

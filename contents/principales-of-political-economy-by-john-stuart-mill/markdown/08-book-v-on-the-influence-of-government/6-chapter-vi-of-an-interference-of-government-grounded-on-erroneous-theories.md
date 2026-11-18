@@ -1,8 +1,6 @@
 ---
 title: Chapter VI. Of An Interference Of Government Grounded On Erroneous Theories.
 path: 08-book-v-on-the-influence-of-government/6-chapter-vi-of-an-interference-of-government-grounded-on-erroneous-theories
-ancestors:
-  - Book V. On The Influence Of Government.
 href: 1129008759595750428_30107-h-10.html.xhtml#pgepubid00268
 source: principales-of-political-economy-by-john-stuart-mill.epub
 ---

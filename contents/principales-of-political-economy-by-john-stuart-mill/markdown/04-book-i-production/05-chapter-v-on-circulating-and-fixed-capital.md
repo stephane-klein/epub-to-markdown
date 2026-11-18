@@ -1,8 +1,6 @@
 ---
 title: Chapter V. On Circulating And Fixed Capital.
 path: 04-book-i-production/05-chapter-v-on-circulating-and-fixed-capital
-ancestors:
-  - Book I. Production.
 href: 1129008759595750428_30107-h-3.html.xhtml#pgepubid00026
 source: principales-of-political-economy-by-john-stuart-mill.epub
 ---

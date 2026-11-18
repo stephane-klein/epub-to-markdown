@@ -1,8 +1,6 @@
 ---
 title: Chapter IV. Of The Differences Of Wages In Different Employments.
 path: 05-book-ii-distribution/4-chapter-iv-of-the-differences-of-wages-in-different-employments
-ancestors:
-  - Book II. Distribution.
 href: 1129008759595750428_30107-h-4.html.xhtml#pgepubid00075
 source: principales-of-political-economy-by-john-stuart-mill.epub
 ---

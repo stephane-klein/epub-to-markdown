@@ -1,8 +1,6 @@
 ---
 title: Introduction
 path: 5-book-ii-of-the-nature-accumulation-and-employment-of-stock/1-introduction
-ancestors:
-  - Book II - Of the nature, accumulation, and employment of stock
 href: 5682792182066254284_38194-h-3.htm.xhtml#pgepubid00200
 source: an-inquiry-into-the-nature-and-causes-of-the-wealth-of-nations-by-smith-and-garnier.epub
 ---

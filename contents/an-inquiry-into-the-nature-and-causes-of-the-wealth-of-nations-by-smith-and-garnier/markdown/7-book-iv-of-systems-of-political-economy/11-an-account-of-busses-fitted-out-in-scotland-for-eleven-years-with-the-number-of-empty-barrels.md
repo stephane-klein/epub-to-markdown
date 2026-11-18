@@ -1,8 +1,6 @@
 ---
 title: An account of busses fitted out in Scotland for eleven years, with the number of empty barrels carried out, and the number of barrels of herrings caught; also the bounty, at a medium, on each barrel of sea-sticks, and on each barrel when fully packed
 path: 7-book-iv-of-systems-of-political-economy/11-an-account-of-busses-fitted-out-in-scotland-for-eleven-years-with-the-number-of-empty-barrels
-ancestors:
-  - Book IV - Of systems of political economy
 href: 5682792182066254284_38194-h-7.htm.xhtml#pgepubid00427
 source: an-inquiry-into-the-nature-and-causes-of-the-wealth-of-nations-by-smith-and-garnier.epub
 ---

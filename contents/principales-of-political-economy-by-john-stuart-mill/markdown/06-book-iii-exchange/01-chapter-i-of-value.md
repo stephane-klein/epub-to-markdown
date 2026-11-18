@@ -1,8 +1,6 @@
 ---
 title: Chapter I. Of Value.
 path: 06-book-iii-exchange/01-chapter-i-of-value
-ancestors:
-  - Book III. Exchange.
 href: 1129008759595750428_30107-h-5.html.xhtml#pgepubid00095
 source: principales-of-political-economy-by-john-stuart-mill.epub
 ---

@@ -1,8 +1,6 @@
 ---
 title: A Brief Bibliography Of The Tariffs Of The United States.
 path: 09-appendix-i-bibliographies/1-a-brief-bibliography-of-the-tariffs-of-the-united-states
-ancestors:
-  - Appendix I. Bibliographies.
 href: 1129008759595750428_30107-h-11.html.xhtml#pgepubid00277
 source: principales-of-political-economy-by-john-stuart-mill.epub
 ---

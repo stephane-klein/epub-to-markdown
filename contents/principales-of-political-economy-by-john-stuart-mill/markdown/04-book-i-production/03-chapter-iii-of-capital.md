@@ -1,8 +1,6 @@
 ---
 title: Chapter III. Of Capital.
 path: 04-book-i-production/03-chapter-iii-of-capital
-ancestors:
-  - Book I. Production.
 href: 1129008759595750428_30107-h-3.html.xhtml#pgepubid00015
 source: principales-of-political-economy-by-john-stuart-mill.epub
 ---

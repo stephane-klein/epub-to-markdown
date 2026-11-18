@@ -1,8 +1,6 @@
 ---
 title: Chapter X. Of An Inconvertible Paper Currency.
 path: 06-book-iii-exchange/10-chapter-x-of-an-inconvertible-paper-currency
-ancestors:
-  - Book III. Exchange.
 href: 1129008759595750428_30107-h-6.html.xhtml#pgepubid00145
 source: principales-of-political-economy-by-john-stuart-mill.epub
 ---

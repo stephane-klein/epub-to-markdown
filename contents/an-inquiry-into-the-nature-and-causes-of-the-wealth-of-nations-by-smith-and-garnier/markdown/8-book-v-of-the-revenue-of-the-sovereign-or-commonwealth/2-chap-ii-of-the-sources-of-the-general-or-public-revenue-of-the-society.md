@@ -1,8 +1,6 @@
 ---
 title: Chap. II - Of the sources of the general or public revenue of the society
 path: 8-book-v-of-the-revenue-of-the-sovereign-or-commonwealth/2-chap-ii-of-the-sources-of-the-general-or-public-revenue-of-the-society
-ancestors:
-  - Book V - Of the revenue of the sovereign or commonwealth
 href: 5682792182066254284_38194-h-9.htm.xhtml#pgepubid00495
 source: an-inquiry-into-the-nature-and-causes-of-the-wealth-of-nations-by-smith-and-garnier.epub
 ---

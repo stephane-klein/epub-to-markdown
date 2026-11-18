@@ -1,8 +1,6 @@
 ---
 title: An account of the quantity of foreign salt imported into Scotland, and of Scotch salt delivered duty-free from the works there, for the fishery, from the 5th of April 1771 to the 5th of April 1782, with the medium of both for one year
 path: 7-book-iv-of-systems-of-political-economy/12-an-account-of-the-quantity-of-foreign-salt-imported-into-scotland-and-of-scotch-salt-delivered-duty
-ancestors:
-  - Book IV - Of systems of political economy
 href: 5682792182066254284_38194-h-8.htm.xhtml#pgepubid00429
 source: an-inquiry-into-the-nature-and-causes-of-the-wealth-of-nations-by-smith-and-garnier.epub
 ---

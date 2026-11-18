@@ -1,8 +1,6 @@
 ---
 title: Chapter VII. Of A Double Standard And Subsidiary Coins.
 path: 06-book-iii-exchange/07-chapter-vii-of-a-double-standard-and-subsidiary-coins
-ancestors:
-  - Book III. Exchange.
 href: 1129008759595750428_30107-h-6.html.xhtml#pgepubid00127
 source: principales-of-political-economy-by-john-stuart-mill.epub
 ---

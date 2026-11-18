@@ -1,8 +1,6 @@
 ---
 title: Chapter VI. Of Rent.
 path: 05-book-ii-distribution/6-chapter-vi-of-rent
-ancestors:
-  - Book II. Distribution.
 href: 1129008759595750428_30107-h-4.html.xhtml#pgepubid00087
 source: principales-of-political-economy-by-john-stuart-mill.epub
 ---

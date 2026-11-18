@@ -1,8 +1,6 @@
 ---
 title: Chapter IX. Of The Law Of The Increase Of Production From Land.
 path: 04-book-i-production/09-chapter-ix-of-the-law-of-the-increase-of-production-from-land
-ancestors:
-  - Book I. Production.
 href: 1129008759595750428_30107-h-3.html.xhtml#pgepubid00044
 source: principales-of-political-economy-by-john-stuart-mill.epub
 ---

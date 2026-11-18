@@ -1,8 +1,6 @@
 ---
 title: Chapter V. Of Profits.
 path: 05-book-ii-distribution/5-chapter-v-of-profits
-ancestors:
-  - Book II. Distribution.
 href: 1129008759595750428_30107-h-4.html.xhtml#pgepubid00081
 source: principales-of-political-economy-by-john-stuart-mill.epub
 ---

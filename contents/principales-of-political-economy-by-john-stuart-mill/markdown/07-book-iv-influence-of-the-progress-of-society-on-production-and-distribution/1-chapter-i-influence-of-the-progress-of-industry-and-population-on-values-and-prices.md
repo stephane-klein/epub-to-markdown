@@ -1,8 +1,6 @@
 ---
 title: Chapter I. Influence Of The Progress Of Industry And Population On Values And Prices.
 path: 07-book-iv-influence-of-the-progress-of-society-on-production-and-distribution/1-chapter-i-influence-of-the-progress-of-industry-and-population-on-values-and-prices
-ancestors:
-  - Book IV. Influence Of The Progress Of Society On Production And Distribution.
 href: 1129008759595750428_30107-h-9.html.xhtml#pgepubid00204
 source: principales-of-political-economy-by-john-stuart-mill.epub
 ---

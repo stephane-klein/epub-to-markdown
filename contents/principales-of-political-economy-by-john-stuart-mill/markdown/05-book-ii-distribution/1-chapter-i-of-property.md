@@ -1,8 +1,6 @@
 ---
 title: Chapter I. Of Property.
 path: 05-book-ii-distribution/1-chapter-i-of-property
-ancestors:
-  - Book II. Distribution.
 href: 1129008759595750428_30107-h-4.html.xhtml#pgepubid00056
 source: principales-of-political-economy-by-john-stuart-mill.epub
 ---

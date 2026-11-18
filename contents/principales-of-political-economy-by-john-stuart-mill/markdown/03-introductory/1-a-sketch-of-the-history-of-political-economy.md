@@ -1,8 +1,6 @@
 ---
 title: A Sketch Of The History Of Political Economy.
 path: 03-introductory/1-a-sketch-of-the-history-of-political-economy
-ancestors:
-  - Introductory.
 href: 1129008759595750428_30107-h-2.html.xhtml#pgepubid00003
 source: principales-of-political-economy-by-john-stuart-mill.epub
 ---

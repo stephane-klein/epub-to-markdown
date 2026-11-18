@@ -1,8 +1,6 @@
 ---
 title: Chap. III - That the division of labour is limited by the extent of the market
 path: 4-book-i-of-the-causes-of-improvement-in-the-productive-powers-of-labour-and-of-the-order-according/03-chap-iii-that-the-division-of-labour-is-limited-by-the-extent-of-the-market
-ancestors:
-  - Book I - Of the causes of improvement in the productive powers of labour, and of the order according to which its produce is naturally distributed among the different ranks of the people
 href: 5682792182066254284_38194-h-0.htm.xhtml#pgepubid00064
 source: an-inquiry-into-the-nature-and-causes-of-the-wealth-of-nations-by-smith-and-garnier.epub
 ---

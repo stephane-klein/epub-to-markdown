@@ -1,8 +1,6 @@
 ---
 title: Chapter II. Of Wages.
 path: 05-book-ii-distribution/2-chapter-ii-of-wages
-ancestors:
-  - Book II. Distribution.
 href: 1129008759595750428_30107-h-4.html.xhtml#pgepubid00063
 source: principales-of-political-economy-by-john-stuart-mill.epub
 ---

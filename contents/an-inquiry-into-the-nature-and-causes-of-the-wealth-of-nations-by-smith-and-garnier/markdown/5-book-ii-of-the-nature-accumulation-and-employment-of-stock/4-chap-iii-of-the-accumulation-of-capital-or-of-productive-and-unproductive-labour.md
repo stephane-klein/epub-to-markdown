@@ -1,8 +1,6 @@
 ---
 title: Chap. III - Of the accumulation of capital, or of productive and unproductive labour
 path: 5-book-ii-of-the-nature-accumulation-and-employment-of-stock/4-chap-iii-of-the-accumulation-of-capital-or-of-productive-and-unproductive-labour
-ancestors:
-  - Book II - Of the nature, accumulation, and employment of stock
 href: 5682792182066254284_38194-h-4.htm.xhtml#pgepubid00229
 source: an-inquiry-into-the-nature-and-causes-of-the-wealth-of-nations-by-smith-and-garnier.epub
 ---

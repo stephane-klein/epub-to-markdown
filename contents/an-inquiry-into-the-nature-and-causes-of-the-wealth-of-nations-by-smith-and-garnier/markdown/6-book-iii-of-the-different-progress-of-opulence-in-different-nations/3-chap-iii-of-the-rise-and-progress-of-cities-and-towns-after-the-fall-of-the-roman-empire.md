@@ -1,8 +1,6 @@
 ---
 title: Chap. III - Of the rise and progress of cities and towns, after the fall of the Roman empire
 path: 6-book-iii-of-the-different-progress-of-opulence-in-different-nations/3-chap-iii-of-the-rise-and-progress-of-cities-and-towns-after-the-fall-of-the-roman-empire
-ancestors:
-  - Book III - Of the different progress of opulence in different nations
 href: 5682792182066254284_38194-h-4.htm.xhtml#pgepubid00268
 source: an-inquiry-into-the-nature-and-causes-of-the-wealth-of-nations-by-smith-and-garnier.epub
 ---

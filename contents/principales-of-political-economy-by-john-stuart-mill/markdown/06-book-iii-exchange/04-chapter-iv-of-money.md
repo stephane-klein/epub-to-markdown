@@ -1,8 +1,6 @@
 ---
 title: Chapter IV. Of Money.
 path: 06-book-iii-exchange/04-chapter-iv-of-money
-ancestors:
-  - Book III. Exchange.
 href: 1129008759595750428_30107-h-5.html.xhtml#pgepubid00114
 source: principales-of-political-economy-by-john-stuart-mill.epub
 ---

@@ -1,8 +1,6 @@
 ---
 title: Chapter IX. Influence Of Credit On Prices.
 path: 06-book-iii-exchange/09-chapter-ix-influence-of-credit-on-prices
-ancestors:
-  - Book III. Exchange.
 href: 1129008759595750428_30107-h-6.html.xhtml#pgepubid00138
 source: principales-of-political-economy-by-john-stuart-mill.epub
 ---

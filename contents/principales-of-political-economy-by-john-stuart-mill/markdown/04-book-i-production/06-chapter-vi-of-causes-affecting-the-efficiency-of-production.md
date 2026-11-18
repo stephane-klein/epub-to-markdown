@@ -1,8 +1,6 @@
 ---
 title: Chapter VI. Of Causes Affecting The Efficiency Of Production.
 path: 04-book-i-production/06-chapter-vi-of-causes-affecting-the-efficiency-of-production
-ancestors:
-  - Book I. Production.
 href: 1129008759595750428_30107-h-3.html.xhtml#pgepubid00030
 source: principales-of-political-economy-by-john-stuart-mill.epub
 ---

@@ -1,8 +1,6 @@
 ---
 title: Chap. III - Of the extraordinary restraints upon the importation of goods of almost all kinds, from those countries with which the balance is supposed to be disadvantageous
 path: 7-book-iv-of-systems-of-political-economy/04-chap-iii-of-the-extraordinary-restraints-upon-the-importation-of-goods-of-almost-all-kinds-from
-ancestors:
-  - Book IV - Of systems of political economy
 href: 5682792182066254284_38194-h-5.htm.xhtml#pgepubid00309
 source: an-inquiry-into-the-nature-and-causes-of-the-wealth-of-nations-by-smith-and-garnier.epub
 ---

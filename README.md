@@ -203,16 +203,18 @@ $ epub-to-markdown generate-markdown contents/my-book/my-book.epub
 
 The command splits the book into one Markdown file per table of contents entry
 at depth `max_split_depth`, plus the shallower entries that have no children.
-Deeper entries are folded into their split ancestor. The body of a parent entry
-(for example `Book I. Production.`) is dropped — its title is kept in the
-`ancestors` frontmatter of its children.
+Deeper entries are folded into their split ancestor.
 
 An entry whose `href` has no anchor (for example `OEBPS/preface.xhtml`) points
 to a whole document: it is always split into its own file, even when it has
 children, and it owns the document content up to the first child anchor.
 
-An entry that has children (its `path` is also a directory) writes its own page
-inside that directory as `00-index.md`; the other entries keep `<path>.md`.
+Every entry that has children owns a directory and writes its page inside it as
+`00-index.md`; the other entries keep `<path>.md`. When the entry is split, its
+page holds its preface. When it sits above `max_split_depth`, the split drops
+its body, so the page holds only the title and the frontmatter. Either way the
+title lives in a file of its own, and a tool can rebuild the tree from the
+`path` field alone.
 
 Some EPUBs spread a single title across several headings and expose each one as
 a separate table of contents entry, producing a heading-only parent with a
@@ -238,8 +240,8 @@ contents/my-book/
 ```
 
 The `markdown/` directory mirrors the table of contents: one file per split
-entry, a subdirectory for each entry that has children, and the extracted
-images under `images/`:
+entry, a page named `00-index.md` inside the directory of each entry that has
+children, and the extracted images under `images/`:
 
 ```sh
 $ tree markdown
@@ -247,31 +249,30 @@ markdown/
 ├── 01-contents.md
 ├── 02-preface.md
 ├── 03-introductory/
+│   ├── 00-index.md
 │   ├── 1-a-sketch-of-the-history-of-political-economy.md
 │   ├── 2-books-for-consultation-from-english-french-and-german-authors.md
 │   └── 3-preliminary-remarks.md
 ├── 04-book-i-production/
+│   ├── 00-index.md
 │   ├── 01-chapter-i-of-the-requisites-of-production.md
 │   ├── 02-chapter-ii-of-unproductive-labor.md
 │   └── …
 ├── …
 ├── 13-footnotes/
+│   ├── 00-index.md
 │   └── 1-the-full-project-gutenbergtm-license.md
 └── images/
     ├── 687523173863510570_capital-circle.png
     └── …
 ```
 
-No `00-index.md` appears here because no entry is both split and a parent in
-this book; when that happens, the entry's own page is written as `00-index.md`
-inside its directory. Each Markdown file looks like this:
+A section file holds its body:
 
 ```markdown
 ---
 title: Chapter I. Of The Requisites Of Production.
 path: 04-book-i-production/01-chapter-i-of-the-requisites-of-production
-ancestors:
-  - Book I. Production.
 href: OEBPS/book-i.xhtml#pgepubid00007
 source: my-book.epub
 ---
@@ -281,6 +282,20 @@ source: my-book.epub
 ## § 1. The Requisites of Production are Two: Labor, and Appropriate Natural Objects.
 
 ...
+```
+
+A parent that sits above `max_split_depth` has no body to render, so its
+`00-index.md` holds the title only:
+
+```markdown
+---
+title: Book I. Production.
+path: 04-book-i-production
+href: OEBPS/book-i.xhtml#pgepubid00006
+source: my-book.epub
+---
+
+# Book I. Production.
 ```
 
 Every Markdown file starts with `# <title>`, taken from the `title` of its

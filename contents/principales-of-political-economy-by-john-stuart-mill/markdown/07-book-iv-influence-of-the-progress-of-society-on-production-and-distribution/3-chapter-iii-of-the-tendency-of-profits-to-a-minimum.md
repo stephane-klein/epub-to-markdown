@@ -1,8 +1,6 @@
 ---
 title: Chapter III. Of The Tendency Of Profits To A Minimum.
 path: 07-book-iv-influence-of-the-progress-of-society-on-production-and-distribution/3-chapter-iii-of-the-tendency-of-profits-to-a-minimum
-ancestors:
-  - Book IV. Influence Of The Progress Of Society On Production And Distribution.
 href: 1129008759595750428_30107-h-9.html.xhtml#pgepubid00216
 source: principales-of-political-economy-by-john-stuart-mill.epub
 ---

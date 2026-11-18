@@ -1,8 +1,6 @@
 ---
 title: Chap. V - Of the different employments of capitals
 path: 5-book-ii-of-the-nature-accumulation-and-employment-of-stock/6-chap-v-of-the-different-employments-of-capitals
-ancestors:
-  - Book II - Of the nature, accumulation, and employment of stock
 href: 5682792182066254284_38194-h-4.htm.xhtml#pgepubid00245
 source: an-inquiry-into-the-nature-and-causes-of-the-wealth-of-nations-by-smith-and-garnier.epub
 ---

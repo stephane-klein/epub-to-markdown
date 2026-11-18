@@ -1,8 +1,6 @@
 ---
 title: Chap. V - Of the real and nominal price of commodities, or of their price in labour, and their price in money
 path: 4-book-i-of-the-causes-of-improvement-in-the-productive-powers-of-labour-and-of-the-order-according/05-chap-v-of-the-real-and-nominal-price-of-commodities-or-of-their-price-in-labour-and-their-price-in
-ancestors:
-  - Book I - Of the causes of improvement in the productive powers of labour, and of the order according to which its produce is naturally distributed among the different ranks of the people
 href: 5682792182066254284_38194-h-0.htm.xhtml#pgepubid00072
 source: an-inquiry-into-the-nature-and-causes-of-the-wealth-of-nations-by-smith-and-garnier.epub
 ---

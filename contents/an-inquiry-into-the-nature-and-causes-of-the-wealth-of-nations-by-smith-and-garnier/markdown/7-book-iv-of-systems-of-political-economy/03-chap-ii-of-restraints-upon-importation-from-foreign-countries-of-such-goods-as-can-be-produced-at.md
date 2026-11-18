@@ -1,8 +1,6 @@
 ---
 title: Chap. II - Of restraints upon importation from foreign countries of such goods as can be produced at home
 path: 7-book-iv-of-systems-of-political-economy/03-chap-ii-of-restraints-upon-importation-from-foreign-countries-of-such-goods-as-can-be-produced-at
-ancestors:
-  - Book IV - Of systems of political economy
 href: 5682792182066254284_38194-h-5.htm.xhtml#pgepubid00298
 source: an-inquiry-into-the-nature-and-causes-of-the-wealth-of-nations-by-smith-and-garnier.epub
 ---

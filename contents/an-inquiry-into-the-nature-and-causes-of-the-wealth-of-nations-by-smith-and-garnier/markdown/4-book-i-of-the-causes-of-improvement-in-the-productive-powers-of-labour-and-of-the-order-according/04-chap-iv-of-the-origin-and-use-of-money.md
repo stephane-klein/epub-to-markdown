@@ -1,8 +1,6 @@
 ---
 title: Chap. IV - Of the origin and use of money
 path: 4-book-i-of-the-causes-of-improvement-in-the-productive-powers-of-labour-and-of-the-order-according/04-chap-iv-of-the-origin-and-use-of-money
-ancestors:
-  - Book I - Of the causes of improvement in the productive powers of labour, and of the order according to which its produce is naturally distributed among the different ranks of the people
 href: 5682792182066254284_38194-h-0.htm.xhtml#pgepubid00067
 source: an-inquiry-into-the-nature-and-causes-of-the-wealth-of-nations-by-smith-and-garnier.epub
 ---

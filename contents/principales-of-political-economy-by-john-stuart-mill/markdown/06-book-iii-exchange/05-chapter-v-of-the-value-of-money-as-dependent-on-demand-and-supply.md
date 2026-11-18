@@ -1,8 +1,6 @@
 ---
 title: Chapter V. Of The Value Of Money, As Dependent On Demand And Supply.
 path: 06-book-iii-exchange/05-chapter-v-of-the-value-of-money-as-dependent-on-demand-and-supply
-ancestors:
-  - Book III. Exchange.
 href: 1129008759595750428_30107-h-5.html.xhtml#pgepubid00118
 source: principales-of-political-economy-by-john-stuart-mill.epub
 ---

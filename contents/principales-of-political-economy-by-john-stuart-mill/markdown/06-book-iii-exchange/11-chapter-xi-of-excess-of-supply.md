@@ -1,8 +1,6 @@
 ---
 title: Chapter XI. Of Excess Of Supply.
 path: 06-book-iii-exchange/11-chapter-xi-of-excess-of-supply
-ancestors:
-  - Book III. Exchange.
 href: 1129008759595750428_30107-h-7.html.xhtml#pgepubid00152
 source: principales-of-political-economy-by-john-stuart-mill.epub
 ---

@@ -1,8 +1,6 @@
 ---
 title: Chap. XI - Of the rent of land
 path: 4-book-i-of-the-causes-of-improvement-in-the-productive-powers-of-labour-and-of-the-order-according/11-chap-xi-of-the-rent-of-land
-ancestors:
-  - Book I - Of the causes of improvement in the productive powers of labour, and of the order according to which its produce is naturally distributed among the different ranks of the people
 href: 5682792182066254284_38194-h-2.htm.xhtml#pgepubid00134
 source: an-inquiry-into-the-nature-and-causes-of-the-wealth-of-nations-by-smith-and-garnier.epub
 ---

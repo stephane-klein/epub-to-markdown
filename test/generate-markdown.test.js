@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { directoryPathsOf, sectionOutputPath } from "../src/generate-markdown.js";
+import { directoryPathsOf, indexOutputPath, sectionOutputPath } from "../src/generate-markdown.js";
 
 const sections = (...paths) => paths.map((path) => ({ entry: { path } }));
 
@@ -22,4 +22,8 @@ test("sectionOutputPath writes a leaf entry next to its siblings", () => {
 
 test("sectionOutputPath writes a directory entry as 00-index.md", () => {
     assert.equal(sectionOutputPath("/out", "2-intro", new Set(["2-intro"])), "/out/2-intro/00-index.md");
+});
+
+test("indexOutputPath writes a parent entry as 00-index.md", () => {
+    assert.equal(indexOutputPath("/out", "2-intro"), "/out/2-intro/00-index.md");
 });

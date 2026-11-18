@@ -1,8 +1,6 @@
 ---
 title: A Brief Bibliography Of Bimetallism.
 path: 09-appendix-i-bibliographies/2-a-brief-bibliography-of-bimetallism
-ancestors:
-  - Appendix I. Bibliographies.
 href: 1129008759595750428_30107-h-11.html.xhtml#pgepubid00278
 source: principales-of-political-economy-by-john-stuart-mill.epub
 ---

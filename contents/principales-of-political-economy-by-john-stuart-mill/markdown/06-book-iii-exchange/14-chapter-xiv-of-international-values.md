@@ -1,8 +1,6 @@
 ---
 title: Chapter XIV. Of International Values.
 path: 06-book-iii-exchange/14-chapter-xiv-of-international-values
-ancestors:
-  - Book III. Exchange.
 href: 1129008759595750428_30107-h-7.html.xhtml#pgepubid00166
 source: principales-of-political-economy-by-john-stuart-mill.epub
 ---

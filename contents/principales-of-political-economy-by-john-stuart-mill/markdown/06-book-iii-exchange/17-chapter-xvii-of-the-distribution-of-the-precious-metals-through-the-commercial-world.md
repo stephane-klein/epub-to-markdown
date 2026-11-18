@@ -1,8 +1,6 @@
 ---
 title: Chapter XVII. Of The Distribution Of The Precious Metals Through The Commercial World.
 path: 06-book-iii-exchange/17-chapter-xvii-of-the-distribution-of-the-precious-metals-through-the-commercial-world
-ancestors:
-  - Book III. Exchange.
 href: 1129008759595750428_30107-h-7.html.xhtml#pgepubid00178
 source: principales-of-political-economy-by-john-stuart-mill.epub
 ---

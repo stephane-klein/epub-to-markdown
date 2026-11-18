@@ -1,8 +1,6 @@
 ---
 title: Chapter XVI. Of The Foreign Exchanges.
 path: 06-book-iii-exchange/16-chapter-xvi-of-the-foreign-exchanges
-ancestors:
-  - Book III. Exchange.
 href: 1129008759595750428_30107-h-7.html.xhtml#pgepubid00175
 source: principales-of-political-economy-by-john-stuart-mill.epub
 ---

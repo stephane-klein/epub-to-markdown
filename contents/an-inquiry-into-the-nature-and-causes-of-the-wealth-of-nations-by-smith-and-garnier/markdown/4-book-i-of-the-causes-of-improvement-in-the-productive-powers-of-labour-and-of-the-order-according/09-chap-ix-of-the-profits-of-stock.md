@@ -1,8 +1,6 @@
 ---
 title: Chap. IX - Of the profits of stock
 path: 4-book-i-of-the-causes-of-improvement-in-the-productive-powers-of-labour-and-of-the-order-according/09-chap-ix-of-the-profits-of-stock
-ancestors:
-  - Book I - Of the causes of improvement in the productive powers of labour, and of the order according to which its produce is naturally distributed among the different ranks of the people
 href: 5682792182066254284_38194-h-1.htm.xhtml#pgepubid00104
 source: an-inquiry-into-the-nature-and-causes-of-the-wealth-of-nations-by-smith-and-garnier.epub
 ---

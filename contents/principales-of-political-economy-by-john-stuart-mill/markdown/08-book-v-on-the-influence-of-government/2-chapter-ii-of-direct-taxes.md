@@ -1,8 +1,6 @@
 ---
 title: Chapter II. Of Direct Taxes.
 path: 08-book-v-on-the-influence-of-government/2-chapter-ii-of-direct-taxes
-ancestors:
-  - Book V. On The Influence Of Government.
 href: 1129008759595750428_30107-h-10.html.xhtml#pgepubid00244
 source: principales-of-political-economy-by-john-stuart-mill.epub
 ---

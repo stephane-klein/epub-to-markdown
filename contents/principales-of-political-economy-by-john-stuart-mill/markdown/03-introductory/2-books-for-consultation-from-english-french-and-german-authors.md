@@ -1,8 +1,6 @@
 ---
 title: Books For Consultation (From English, French, And German Authors).
 path: 03-introductory/2-books-for-consultation-from-english-french-and-german-authors
-ancestors:
-  - Introductory.
 href: 1129008759595750428_30107-h-2.html.xhtml#pgepubid00004
 source: principales-of-political-economy-by-john-stuart-mill.epub
 ---

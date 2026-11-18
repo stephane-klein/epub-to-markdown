@@ -1,8 +1,6 @@
 ---
 title: Chapter III. Of Remedies For Low Wages.
 path: 05-book-ii-distribution/3-chapter-iii-of-remedies-for-low-wages
-ancestors:
-  - Book II. Distribution.
 href: 1129008759595750428_30107-h-4.html.xhtml#pgepubid00069
 source: principales-of-political-economy-by-john-stuart-mill.epub
 ---

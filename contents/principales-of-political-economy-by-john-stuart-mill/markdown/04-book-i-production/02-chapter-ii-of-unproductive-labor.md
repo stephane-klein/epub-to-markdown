@@ -1,8 +1,6 @@
 ---
 title: Chapter II. Of Unproductive Labor.
 path: 04-book-i-production/02-chapter-ii-of-unproductive-labor
-ancestors:
-  - Book I. Production.
 href: 1129008759595750428_30107-h-3.html.xhtml#pgepubid00011
 source: principales-of-political-economy-by-john-stuart-mill.epub
 ---

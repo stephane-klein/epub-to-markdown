@@ -1,8 +1,6 @@
 ---
 title: Chapter XV. Of Money Considered As An Imported Commodity.
 path: 06-book-iii-exchange/15-chapter-xv-of-money-considered-as-an-imported-commodity
-ancestors:
-  - Book III. Exchange.
 href: 1129008759595750428_30107-h-7.html.xhtml#pgepubid00172
 source: principales-of-political-economy-by-john-stuart-mill.epub
 ---

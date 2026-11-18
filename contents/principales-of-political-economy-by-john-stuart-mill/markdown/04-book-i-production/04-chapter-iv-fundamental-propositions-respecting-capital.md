@@ -1,8 +1,6 @@
 ---
 title: Chapter IV. Fundamental Propositions Respecting Capital.
 path: 04-book-i-production/04-chapter-iv-fundamental-propositions-respecting-capital
-ancestors:
-  - Book I. Production.
 href: 1129008759595750428_30107-h-3.html.xhtml#pgepubid00019
 source: principales-of-political-economy-by-john-stuart-mill.epub
 ---

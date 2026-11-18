@@ -1,8 +1,6 @@
 ---
 title: Chapter II. Influence Of The Progress Of Industry And Population On Rents, Profits, And Wages.
 path: 07-book-iv-influence-of-the-progress-of-society-on-production-and-distribution/2-chapter-ii-influence-of-the-progress-of-industry-and-population-on-rents-profits-and-wages
-ancestors:
-  - Book IV. Influence Of The Progress Of Society On Production And Distribution.
 href: 1129008759595750428_30107-h-9.html.xhtml#pgepubid00210
 source: principales-of-political-economy-by-john-stuart-mill.epub
 ---

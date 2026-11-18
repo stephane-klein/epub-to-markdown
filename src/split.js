@@ -55,7 +55,7 @@ export const stripLeadingTitle = (html, anchor, entriesByAnchor) => {
     return html.slice(0, first.index) + html.slice(tail);
 };
 
-const flattenToc = (nodes, depth = 1, ancestors = []) =>
+const flattenToc = (nodes, depth = 1) =>
     nodes.flatMap((node) => {
         const children = node.children ?? [];
         return [
@@ -64,14 +64,35 @@ const flattenToc = (nodes, depth = 1, ancestors = []) =>
                 href: node.href,
                 path: node.path,
                 depth,
-                ancestors,
                 hasChildren: children.length > 0,
                 childCount: children.length,
                 onlyChildHref: children[0]?.href ?? null,
             },
-            ...(children.length > 0 ? flattenToc(children, depth + 1, [...ancestors, node.title]) : []),
+            ...(children.length > 0 ? flattenToc(children, depth + 1) : []),
         ];
     });
+
+// Returns the parent entries that own no file. Their title would otherwise be
+// lost, because the split drops the body of a parent that sits above
+// maxSplitDepth. The generator writes each one as <path>/00-index.md.
+const missingParents = (sections, entries) => {
+    const sectionPaths = new Set(sections.map((section) => section.entry.path));
+    const entriesByPath = new Map(entries.map((entry) => [entry.path, entry]));
+    const order = new Map(entries.map((entry, index) => [entry.path, index]));
+    const missing = new Map();
+
+    for (const section of sections) {
+        const segments = section.entry.path.split("/");
+        for (let index = 1; index < segments.length; index++) {
+            const path = segments.slice(0, index).join("/");
+            if (sectionPaths.has(path) || missing.has(path)) continue;
+            const entry = entriesByPath.get(path);
+            if (entry) missing.set(path, entry);
+        }
+    }
+
+    return [...missing.values()].sort((left, right) => order.get(left.path) - order.get(right.path));
+};
 
 const isSplitEntry = (entry, maxSplitDepth, documentLevel = false) =>
     documentLevel || entry.depth === maxSplitDepth || (entry.depth < maxSplitDepth && !entry.hasChildren);
@@ -144,7 +165,6 @@ export const splitIntoSections = ({ toc, maxSplitDepth, documents }) => {
                         path: entry.path,
                         href: entry.href,
                         depth: entry.depth,
-                        ancestors: entry.ancestors,
                     },
                     html: segment,
                 };
@@ -162,5 +182,5 @@ export const splitIntoSections = ({ toc, maxSplitDepth, documents }) => {
         }
     }
 
-    return { sections, entriesByAnchor };
+    return { sections, entriesByAnchor, indexEntries: missingParents(sections, entries) };
 };

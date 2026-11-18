@@ -1,8 +1,6 @@
 ---
 title: A Brief Bibliography Of American Shipping.
 path: 09-appendix-i-bibliographies/3-a-brief-bibliography-of-american-shipping
-ancestors:
-  - Appendix I. Bibliographies.
 href: 1129008759595750428_30107-h-11.html.xhtml#pgepubid00279
 source: principales-of-political-economy-by-john-stuart-mill.epub
 ---

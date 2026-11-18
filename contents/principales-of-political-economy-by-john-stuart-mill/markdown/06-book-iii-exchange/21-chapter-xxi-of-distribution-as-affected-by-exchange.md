@@ -1,8 +1,6 @@
 ---
 title: Chapter XXI. Of Distribution, As Affected By Exchange.
 path: 06-book-iii-exchange/21-chapter-xxi-of-distribution-as-affected-by-exchange
-ancestors:
-  - Book III. Exchange.
 href: 1129008759595750428_30107-h-8.html.xhtml#pgepubid00199
 source: principales-of-political-economy-by-john-stuart-mill.epub
 ---

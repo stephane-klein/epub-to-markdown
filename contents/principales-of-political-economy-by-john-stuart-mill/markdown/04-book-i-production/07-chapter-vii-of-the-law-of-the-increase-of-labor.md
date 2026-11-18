@@ -1,8 +1,6 @@
 ---
 title: Chapter VII. Of The Law Of The Increase Of Labor.
 path: 04-book-i-production/07-chapter-vii-of-the-law-of-the-increase-of-labor
-ancestors:
-  - Book I. Production.
 href: 1129008759595750428_30107-h-3.html.xhtml#pgepubid00035
 source: principales-of-political-economy-by-john-stuart-mill.epub
 ---

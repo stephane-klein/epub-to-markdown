@@ -1,8 +1,6 @@
 ---
 title: Chapter X. Consequences Of The Foregoing Laws.
 path: 04-book-i-production/10-chapter-x-consequences-of-the-foregoing-laws
-ancestors:
-  - Book I. Production.
 href: 1129008759595750428_30107-h-3.html.xhtml#pgepubid00050
 source: principales-of-political-economy-by-john-stuart-mill.epub
 ---

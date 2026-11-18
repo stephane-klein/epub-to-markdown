@@ -1,8 +1,6 @@
 ---
 title: Chapter VI. Of The Value Of Money, As Dependent On Cost Of Production.
 path: 06-book-iii-exchange/06-chapter-vi-of-the-value-of-money-as-dependent-on-cost-of-production
-ancestors:
-  - Book III. Exchange.
 href: 1129008759595750428_30107-h-6.html.xhtml#pgepubid00123
 source: principales-of-political-economy-by-john-stuart-mill.epub
 ---

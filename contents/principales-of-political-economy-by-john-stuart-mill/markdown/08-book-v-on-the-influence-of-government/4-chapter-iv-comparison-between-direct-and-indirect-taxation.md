@@ -1,8 +1,6 @@
 ---
 title: Chapter IV. Comparison Between Direct And Indirect Taxation.
 path: 08-book-v-on-the-influence-of-government/4-chapter-iv-comparison-between-direct-and-indirect-taxation
-ancestors:
-  - Book V. On The Influence Of Government.
 href: 1129008759595750428_30107-h-10.html.xhtml#pgepubid00258
 source: principales-of-political-economy-by-john-stuart-mill.epub
 ---

@@ -1,8 +1,6 @@
 ---
 title: Chapter XX. Of The Competition Of Different Countries In The Same Market.
 path: 06-book-iii-exchange/20-chapter-xx-of-the-competition-of-different-countries-in-the-same-market
-ancestors:
-  - Book III. Exchange.
 href: 1129008759595750428_30107-h-8.html.xhtml#pgepubid00193
 source: principales-of-political-economy-by-john-stuart-mill.epub
 ---

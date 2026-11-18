@@ -1,8 +1,6 @@
 ---
 title: Chap. III - Of public debts
 path: 8-book-v-of-the-revenue-of-the-sovereign-or-commonwealth/3-chap-iii-of-public-debts
-ancestors:
-  - Book V - Of the revenue of the sovereign or commonwealth
 href: 5682792182066254284_38194-h-10.htm.xhtml#pgepubid00551
 source: an-inquiry-into-the-nature-and-causes-of-the-wealth-of-nations-by-smith-and-garnier.epub
 ---

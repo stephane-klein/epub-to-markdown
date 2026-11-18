@@ -28,6 +28,8 @@ export const sectionOutputPath = (outputDir, entryPath, directoryPaths) =>
         ? resolve(outputDir, entryPath, "00-index.md")
         : resolve(outputDir, `${entryPath}.md`);
 
+export const indexOutputPath = (outputDir, entryPath) => resolve(outputDir, entryPath, "00-index.md");
+
 const headingLevelResolver = (entriesByAnchor, sectionDepth) => (node) => {
     let current = node;
     while (current?.nodeName) {
@@ -53,10 +55,15 @@ const imageResolver = (epub, images) => (src) => {
 const frontmatterFor = (entry, source) => ({
     title: entry.title,
     path: entry.path,
-    ...(entry.ancestors.length > 0 ? { ancestors: entry.ancestors } : {}),
     href: entry.href,
     source,
 });
+
+const writePage = async (outputPath, entry, markdown, source) => {
+    const frontmatter = stringify(frontmatterFor(entry, source), { lineWidth: 0 });
+    await mkdir(dirname(outputPath), { recursive: true });
+    await writeFile(outputPath, `---\n${frontmatter}---\n\n${markdown}\n`);
+};
 
 const NOTES_TITLE = /^(notes?|footnotes?|endnotes?)$/i;
 
@@ -134,7 +141,7 @@ export const runGenerateMarkdown = async ({ epubPath }) => {
                         href,
                         html: context.epub.readText(href),
                     }));
-                    const { sections, entriesByAnchor } = splitIntoSections({
+                    const { sections, entriesByAnchor, indexEntries } = splitIntoSections({
                         toc: context.toc,
                         maxSplitDepth: context.config.maxSplitDepth,
                         documents,
@@ -142,6 +149,7 @@ export const runGenerateMarkdown = async ({ epubPath }) => {
                     context.footnotes = collectFootnotes({ documents });
                     context.removeElements = footnoteRemover(sections, context.footnotes.removals);
                     context.sections = sections;
+                    context.indexEntries = indexEntries;
                     context.entriesByAnchor = entriesByAnchor;
                     task.title = `Extract content sections (${sections.length})`;
                 },
@@ -150,49 +158,46 @@ export const runGenerateMarkdown = async ({ epubPath }) => {
                 title: "Write markdown files",
                 task: (_, task) => {
                     const directoryPaths = directoryPathsOf(context.sections);
-                    return task.newListr(
-                        context.sections.map((section) => ({
-                            title: section.entry.path,
-                            task: async (_, subtask) => {
-                                const resolveImage = imageResolver(context.epub, context.images);
-                                const footnotes = createFootnoteTracker(context.footnotes.references);
-                                const body = htmlToMarkdown(
-                                    stripLeadingTitle(
-                                        section.html,
-                                        sectionAnchor(section.entry),
-                                        context.entriesByAnchor,
-                                    ),
-                                    {
-                                        headingLevel: headingLevelResolver(
-                                            context.entriesByAnchor,
-                                            section.entry.depth,
-                                        ),
-                                        imageResolver: resolveImage,
-                                        maxLineLength: context.config.maxLineLength,
-                                        footnotes,
-                                        removeElements: context.removeElements,
-                                    },
-                                );
-                                const definitions = footnotes.used.map(({ label, definitionHtml }) => {
-                                    const content = htmlToMarkdown(definitionHtml, {
-                                        imageResolver: resolveImage,
-                                        maxLineLength: 0,
-                                    });
-                                    return `[^${label}]: ${indentContinuation(content)}`;
+                    const sectionTasks = context.sections.map((section) => ({
+                        title: section.entry.path,
+                        task: async (_, subtask) => {
+                            const resolveImage = imageResolver(context.epub, context.images);
+                            const footnotes = createFootnoteTracker(context.footnotes.references);
+                            const body = htmlToMarkdown(
+                                stripLeadingTitle(section.html, sectionAnchor(section.entry), context.entriesByAnchor),
+                                {
+                                    headingLevel: headingLevelResolver(context.entriesByAnchor, section.entry.depth),
+                                    imageResolver: resolveImage,
+                                    maxLineLength: context.config.maxLineLength,
+                                    footnotes,
+                                    removeElements: context.removeElements,
+                                },
+                            );
+                            const definitions = footnotes.used.map(({ label, definitionHtml }) => {
+                                const content = htmlToMarkdown(definitionHtml, {
+                                    imageResolver: resolveImage,
+                                    maxLineLength: 0,
                                 });
-                                let markdown = `# ${sectionTitle(section.entry)}\n\n${body}`.trimEnd();
-                                if (definitions.length > 0) {
-                                    markdown += `\n\n${definitions.join("\n\n")}`;
-                                }
-                                const outputPath = sectionOutputPath(outputDir, section.entry.path, directoryPaths);
-                                const frontmatter = stringify(frontmatterFor(section.entry, source), { lineWidth: 0 });
-                                await mkdir(dirname(outputPath), { recursive: true });
-                                await writeFile(outputPath, `---\n${frontmatter}---\n\n${markdown}\n`);
-                                subtask.output = `written  ${relative(outputDir, outputPath)}`;
-                            },
-                        })),
-                        { concurrent: false },
-                    );
+                                return `[^${label}]: ${indentContinuation(content)}`;
+                            });
+                            let markdown = `# ${sectionTitle(section.entry)}\n\n${body}`.trimEnd();
+                            if (definitions.length > 0) {
+                                markdown += `\n\n${definitions.join("\n\n")}`;
+                            }
+                            const outputPath = sectionOutputPath(outputDir, section.entry.path, directoryPaths);
+                            await writePage(outputPath, section.entry, markdown, source);
+                            subtask.output = `written  ${relative(outputDir, outputPath)}`;
+                        },
+                    }));
+                    const indexTasks = context.indexEntries.map((entry) => ({
+                        title: entry.path,
+                        task: async (_, subtask) => {
+                            const outputPath = indexOutputPath(outputDir, entry.path);
+                            await writePage(outputPath, entry, `# ${sectionTitle(entry)}`, source);
+                            subtask.output = `written  ${relative(outputDir, outputPath)}`;
+                        },
+                    }));
+                    return task.newListr([...sectionTasks, ...indexTasks], { concurrent: false });
                 },
             },
             {

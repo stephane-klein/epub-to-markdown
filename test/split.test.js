@@ -62,12 +62,13 @@ test("splitIntoSections drops the body of a parent entry", () => {
     assert.ok(!sections.some((section) => section.html.includes("book intro")));
 });
 
-test("splitIntoSections records ancestor titles", () => {
-    const { sections } = splitIntoSections({ toc, maxSplitDepth: 2, documents });
-    const chapter = sections.find((section) => section.entry.path === "02-book-one/01-chapter-one");
-    assert.deepEqual(chapter.entry.ancestors, ["Book One"]);
-    const contents = sections.find((section) => section.entry.path === "01-contents");
-    assert.deepEqual(contents.entry.ancestors, []);
+test("splitIntoSections returns the parent entries that own no file", () => {
+    const { indexEntries } = splitIntoSections({ toc, maxSplitDepth: 2, documents });
+    assert.deepEqual(
+        indexEntries.map((entry) => entry.path),
+        ["02-book-one"],
+    );
+    assert.equal(indexEntries[0].title, "Book One");
 });
 
 test("splitIntoSections with maxSplitDepth 1 folds everything under the top level", () => {
@@ -78,16 +79,27 @@ test("splitIntoSections with maxSplitDepth 1 folds everything under the top leve
     assert.match(book.html, /id="sa"/);
 });
 
-test("splitIntoSections with maxSplitDepth 3 drops intermediate parents", () => {
-    const { sections } = splitIntoSections({ toc, maxSplitDepth: 3, documents });
+test("splitIntoSections with maxSplitDepth 3 drops intermediate parents but keeps their index", () => {
+    const { sections, indexEntries } = splitIntoSections({ toc, maxSplitDepth: 3, documents });
     assert.deepEqual(paths(sections), [
         "01-contents",
         "02-book-one/01-chapter-one/1-section-a",
         "02-book-one/02-chapter-two",
         "03-appendix",
     ]);
-    const section = sections.find((s) => s.entry.path.endsWith("1-section-a"));
-    assert.deepEqual(section.entry.ancestors, ["Book One", "Chapter One"]);
+    assert.deepEqual(
+        indexEntries.map((entry) => entry.path),
+        ["02-book-one", "02-book-one/01-chapter-one"],
+    );
+    assert.deepEqual(
+        indexEntries.map((entry) => entry.title),
+        ["Book One", "Chapter One"],
+    );
+});
+
+test("splitIntoSections needs no index when the top level owns the files", () => {
+    const { indexEntries } = splitIntoSections({ toc, maxSplitDepth: 1, documents });
+    assert.deepEqual(indexEntries, []);
 });
 
 test("splitIntoSections appends a file prefix to the previous section", () => {
@@ -177,9 +189,14 @@ test("splitIntoSections gives a document-level parent its preamble and keeps the
         },
     ];
 
-    const { sections } = splitIntoSections({ toc: documentToc, maxSplitDepth: 2, documents: documentDocuments });
+    const { sections, indexEntries } = splitIntoSections({
+        toc: documentToc,
+        maxSplitDepth: 2,
+        documents: documentDocuments,
+    });
 
     assert.deepEqual(paths(sections), ["2-introduction", "2-introduction/1-section-one"]);
+    assert.deepEqual(indexEntries, []);
     assert.match(sections[0].html, /intro preamble/);
     assert.doesNotMatch(sections[0].html, /section body/);
     assert.match(sections[1].html, /section body/);
@@ -238,7 +255,6 @@ test("splitIntoSections merges a heading-only parent into its only child", () =>
     const [merged] = sections;
     assert.equal(merged.entry.title, "LIFE AND WRITINGS OF DR. ADAM SMITH");
     assert.equal(merged.entry.path, "06-life-and-writings");
-    assert.deepEqual(merged.entry.ancestors, []);
     assert.match(merged.html, /id="life"/);
     assert.match(merged.html, /id="smith"/);
     assert.match(merged.html, /biography/);
@@ -269,7 +285,7 @@ test("splitIntoSections keeps a parent with content as its own dropped section",
         },
     ];
 
-    const { sections } = splitIntoSections({
+    const { sections, indexEntries } = splitIntoSections({
         toc: contentParentToc,
         maxSplitDepth: 2,
         documents: contentParentDocuments,
@@ -277,7 +293,11 @@ test("splitIntoSections keeps a parent with content as its own dropped section",
 
     assert.deepEqual(paths(sections), ["01-contents/1-short-account"]);
     assert.equal(sections[0].entry.title, "SHORT ACCOUNT");
-    assert.deepEqual(sections[0].entry.ancestors, ["CONTENTS"]);
+    assert.deepEqual(
+        indexEntries.map((entry) => entry.path),
+        ["01-contents"],
+    );
+    assert.equal(indexEntries[0].title, "CONTENTS");
 });
 
 test("splitIntoSections does not merge a parent with several children", () => {

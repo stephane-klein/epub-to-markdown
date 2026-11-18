@@ -1,8 +1,6 @@
 ---
 title: Preliminary Remarks.
 path: 03-introductory/3-preliminary-remarks
-ancestors:
-  - Introductory.
 href: 1129008759595750428_30107-h-2.html.xhtml#pgepubid00005
 source: principales-of-political-economy-by-john-stuart-mill.epub
 ---
