@@ -140,6 +140,14 @@ reviewed one to `toc.yaml`. The reviewed tree is validated before being written:
 every `id` must reference a known heading, entries cannot be duplicated and they
 must follow the reading order. On failure `toc.yaml` is left untouched.
 
+After the review, the command also promotes the bold lead of numbered sections.
+When the reviewed title is only a number and the section starts with a bold
+phrase, the phrase becomes the subtitle: `1 - Les deux XIXe siècles`. The lead
+is kept verbatim, minus one trailing sentence period. Titles that already
+contain text are left untouched, as are sections without a bold lead. Because
+the subtitle is part of the title, the generated `slug` and `path` include it
+(`1-introduction/01-1-les-deux-xixe-siecles`).
+
 The model, endpoint and API key come from the command line flags (`--model`,
 `--endpoint`, `--api-key`, `--session`, `--retry-delays`,
 `--max-output-tokens`), the environment, or the project configuration file
@@ -307,6 +315,14 @@ leading headings that form that title (for example `CHAP. I.` followed by
 `OF THE DIVISION OF LABOUR.`) are dropped from the body. The descendants of the
 entry are `##`, `###`, and so on; headings that do not belong to the table of
 contents are rendered as plain text.
+
+The same contract applies when the title comes from the navigation or from a
+bold lead: the leading number, subtitle and closing punctuation are removed
+from the body. The comparison ignores case, accents, punctuation and whitespace,
+so a reviewed title such as `1 - Les deux XIXe siècles` still matches a bold lead
+written `Les deux XIXe siècles.`. If the body does not start with the title, it
+is left unchanged. At the end of the run, the command prints how many sections
+were cleaned and how many had no matching title prefix.
 
 Footnote references are replaced by Markdown footnotes (`[^12]`), and the note
 text is written at the end of the same file (`[^12]: ...`), even when the note

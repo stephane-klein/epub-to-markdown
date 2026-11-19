@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { splitIntoSections, stripLeadingTitle } from "../src/split.js";
+import { splitIntoSections, stripLeadingTitle, stripRepeatedTitle } from "../src/split.js";
 
 const toc = [
     { title: "Contents", path: "01-contents", href: "book.xhtml#c" },
@@ -334,4 +334,98 @@ test("splitIntoSections does not merge a parent with several children", () => {
         sections.map((section) => section.entry.title),
         ["ONE", "TWO"],
     );
+});
+
+test("stripRepeatedTitle removes the number and the bold lead", () => {
+    const html =
+        '<div class="niv1tit">1</div><div class="niv1p"><span class="bold">Les deux XIX</span><sup><span class="bold">e</span></sup> <span class="bold">siècles.</span> Le siècle commence.</div>';
+    const result = stripRepeatedTitle(html, "1 - Les deux XIXe siècles");
+
+    assert.equal(result.removed, 2);
+    assert.match(result.html, /Le siècle commence/);
+    assert.doesNotMatch(result.html, /Les deux XIX/);
+});
+
+test("stripRepeatedTitle removes a plain text title", () => {
+    const html =
+        '<div class="chtit">INTRODUCTION</div><div class="chstit">Le siècle des radicalités existentielles</div>';
+    const result = stripRepeatedTitle(html, "Introduction");
+
+    assert.equal(result.removed, 1);
+    assert.match(result.html, /Le siècle des radicalités existentielles/);
+    assert.doesNotMatch(result.html, /INTRODUCTION/);
+});
+
+test("stripRepeatedTitle removes each part of a compound title", () => {
+    const html =
+        '<div class="chlab">I</div><div class="chtit">HENRY DAVID THOREAU</div><div class="chstit">et « le bonheur parfait »</div>';
+    const result = stripRepeatedTitle(html, "I - Henry David Thoreau");
+
+    assert.equal(result.removed, 2);
+    assert.doesNotMatch(result.html, /HENRY DAVID THOREAU/);
+    assert.match(result.html, /et « le bonheur parfait »/);
+});
+
+test("stripRepeatedTitle ignores case, accents and punctuation", () => {
+    const html =
+        '<div class="niv1tit">3</div><div class="niv1p"><span class="bold">EGOTISME, INDIVIDUALISME, DANDYSME.</span> Le texte.</div>';
+    const result = stripRepeatedTitle(html, "3 - Egotisme, individualisme, dandysme");
+
+    assert.equal(result.removed, 2);
+    assert.match(result.html, /Le texte/);
+    assert.doesNotMatch(result.html, /EGOTISME/);
+});
+
+test("stripRepeatedTitle consumes an ellipsis and a closing quote", () => {
+    const ellipsis =
+        '<div class="niv1tit">2</div><div class="niv1p"><span class="bold">Thoreau, philosophe proustien...</span> On ne...</div>';
+    assert.match(stripRepeatedTitle(ellipsis, "2 - Thoreau, philosophe proustien...").html, /On ne/);
+
+    const quote =
+        '<div class="niv1tit">9</div><div class="niv1p"><span class="bold">« L\'homme est ce qu\'il mange</span> ». Sa mauvaise...</div>';
+    const quoted = stripRepeatedTitle(quote, "9 - « L'homme est ce qu'il mange »");
+    assert.match(quoted.html, /Sa mauvaise/);
+    assert.doesNotMatch(quoted.html, /mange/);
+});
+
+test("stripRepeatedTitle consumes a period placed after the bold lead", () => {
+    const html = '<div class="niv1tit">1</div><div class="niv1p"><span class="bold">Titre</span>. Le texte.</div>';
+    const result = stripRepeatedTitle(html, "1 - Titre");
+
+    assert.equal(result.removed, 2);
+    assert.match(result.html, /Le texte/);
+});
+
+test("stripRepeatedTitle handles the title and the body in one text node", () => {
+    const html = "<p>1. Titre. Le texte.</p>";
+    const result = stripRepeatedTitle(html, "1 - Titre");
+
+    assert.equal(result.removed, 2);
+    assert.match(result.html, /Le texte/);
+    assert.doesNotMatch(result.html, /Titre/);
+});
+
+test("stripRepeatedTitle keeps the html when the body does not start with the title", () => {
+    const html = "<p>Un préambule.</p>";
+    const result = stripRepeatedTitle(html, "1 - Les deux XIXe siècles");
+
+    assert.equal(result.removed, 0);
+    assert.equal(result.html, html);
+});
+
+test("stripRepeatedTitle does not remove a number that starts a longer number", () => {
+    const html = '<div class="niv1tit">10</div><p>Le texte.</p>';
+    const result = stripRepeatedTitle(html, "1");
+
+    assert.equal(result.removed, 0);
+    assert.equal(result.html, html);
+});
+
+test("stripRepeatedTitle removes the subtitle when the number is absent", () => {
+    const html = '<div class="niv1p"><span class="bold">Titre.</span> Le texte.</div>';
+    const result = stripRepeatedTitle(html, "1 - Titre");
+
+    assert.equal(result.removed, 1);
+    assert.doesNotMatch(result.html, /Titre/);
+    assert.match(result.html, /Le texte/);
 });

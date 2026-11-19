@@ -8,7 +8,7 @@ import { readEpub } from "./epub.js";
 import { collectFootnotes, createFootnoteTracker } from "./footnotes.js";
 import { htmlToMarkdown } from "./markdown.js";
 import { MARKDOWN_SCHEMA_VERSION } from "./schema.js";
-import { splitIntoSections, stripLeadingTitle } from "./split.js";
+import { splitIntoSections, stripLeadingTitle, stripRepeatedTitle } from "./split.js";
 
 const clampHeadingLevel = (level) => Math.max(1, Math.min(6, level));
 
@@ -114,7 +114,7 @@ export const runGenerateMarkdown = async ({ epubPath }) => {
         throw new Error(`config.yaml not found at ${configPath}`);
     }
 
-    const context = { images: new Map() };
+    const context = { images: new Map(), cleaned: 0, unmatched: 0 };
 
     const rendererOptions = {
         logger: new ListrLogger({ processOutput: new ProcessOutput(process.stderr, process.stderr) }),
@@ -165,16 +165,19 @@ export const runGenerateMarkdown = async ({ epubPath }) => {
                         task: async (_, subtask) => {
                             const resolveImage = imageResolver(context.epub, context.images);
                             const footnotes = createFootnoteTracker(context.footnotes.references);
-                            const body = htmlToMarkdown(
+                            const stripped = stripRepeatedTitle(
                                 stripLeadingTitle(section.html, sectionAnchor(section.entry), context.entriesByAnchor),
-                                {
-                                    headingLevel: headingLevelResolver(context.entriesByAnchor, section.entry.depth),
-                                    imageResolver: resolveImage,
-                                    maxLineLength: context.config.maxLineLength,
-                                    footnotes,
-                                    removeElements: context.removeElements,
-                                },
+                                section.entry.title,
                             );
+                            if (stripped.removed > 0) context.cleaned++;
+                            else context.unmatched++;
+                            const body = htmlToMarkdown(stripped.html, {
+                                headingLevel: headingLevelResolver(context.entriesByAnchor, section.entry.depth),
+                                imageResolver: resolveImage,
+                                maxLineLength: context.config.maxLineLength,
+                                footnotes,
+                                removeElements: context.removeElements,
+                            });
                             const definitions = footnotes.used.map(({ label, definitionHtml }) => {
                                 const content = htmlToMarkdown(definitionHtml, {
                                     imageResolver: resolveImage,
@@ -217,4 +220,8 @@ export const runGenerateMarkdown = async ({ epubPath }) => {
         ],
         { exitOnError: false, rendererOptions },
     ).run();
+
+    console.log(
+        `Title cleanup: ${context.cleaned} sections cleaned, ${context.unmatched} sections without a matching title prefix`,
+    );
 };

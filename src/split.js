@@ -1,3 +1,5 @@
+import { isNumericTitle, titleFragments, titleKey } from "./title.js";
+
 const anchorOffset = (html, anchor) => {
     const index = html.indexOf(`id="${anchor}"`);
     return index < 0 ? -1 : html.lastIndexOf("<", index);
@@ -53,6 +55,152 @@ export const stripLeadingTitle = (html, anchor, entriesByAnchor) => {
     while (tail < html.length && /\s/.test(html[tail])) tail++;
 
     return html.slice(0, first.index) + html.slice(tail);
+};
+
+const ENTITY = /^&(#x?[0-9a-f]+|[a-z]+);/i;
+
+const TRAILING = /[\s.…»”"!?:;,]/;
+
+const isTrailing = (value) => TRAILING.test(value);
+
+const textTokens = (html) => {
+    const tokens = [];
+    const pattern = /<[^>]*>|[^<]+/g;
+    let match = pattern.exec(html);
+    while (match) {
+        if (!match[0].startsWith("<")) {
+            tokens.push({ start: match.index, end: match.index + match[0].length, raw: match[0] });
+        }
+        match = pattern.exec(html);
+    }
+    return tokens;
+};
+
+const keyCharacters = (tokens, limit = 600) => {
+    const characters = [];
+    let key = "";
+    for (let tokenIndex = 0; tokenIndex < tokens.length && key.length < limit; tokenIndex++) {
+        const raw = tokens[tokenIndex].raw;
+        for (let rawIndex = 0; rawIndex < raw.length && key.length < limit; ) {
+            if (raw[rawIndex] === "&") {
+                const entity = raw.slice(rawIndex).match(ENTITY);
+                if (entity) {
+                    const chunk = titleKey(entity[0]);
+                    for (const character of chunk) {
+                        characters.push({ tokenIndex, rawIndex, rawLength: entity[0].length, character });
+                        key += character;
+                    }
+                    rawIndex += entity[0].length;
+                    continue;
+                }
+            }
+            const chunk = titleKey(raw[rawIndex]);
+            for (const character of chunk) {
+                characters.push({ tokenIndex, rawIndex, rawLength: 1, character });
+                key += character;
+            }
+            rawIndex++;
+        }
+    }
+    return { characters, key };
+};
+
+// Remove the leading fragments that repeat the title. The body often starts
+// with the section number and the bold lead that the table of contents now
+// uses as its title.
+export const stripRepeatedTitle = (html, title) => {
+    const fragments = titleFragments(title);
+    if (fragments.length === 0) return { html, removed: 0 };
+
+    const tokens = textTokens(html);
+    if (tokens.length === 0) return { html, removed: 0 };
+
+    const { characters, key } = keyCharacters(tokens);
+    if (characters.length === 0) return { html, removed: 0 };
+
+    const removals = [];
+    let keyPosition = 0;
+    let removed = 0;
+
+    const addRange = (token, from, to) => {
+        if (to > from) removals.push({ start: token.start + from, end: token.start + to });
+    };
+
+    const matchFragment = (fragmentKey) => {
+        if (!fragmentKey) return true;
+        if (!key.startsWith(fragmentKey, keyPosition)) return false;
+
+        const keyEnd = keyPosition + fragmentKey.length;
+        const last = characters[keyEnd - 1];
+        const lastToken = tokens[last.tokenIndex];
+        const nextRaw = last.rawIndex + last.rawLength;
+        const nextKey = characters[keyEnd];
+        if (
+            nextKey &&
+            nextKey.tokenIndex === last.tokenIndex &&
+            (nextKey.rawIndex === last.rawIndex || nextKey.rawIndex === nextRaw)
+        ) {
+            return false;
+        }
+
+        const first = characters[keyPosition];
+        const firstToken = tokens[first.tokenIndex];
+        let startOffset = first.rawIndex;
+        while (startOffset > 0 && titleKey(firstToken.raw[startOffset - 1]) === "") startOffset--;
+        let endOffset = nextRaw;
+        while (endOffset < lastToken.raw.length && isTrailing(lastToken.raw[endOffset])) endOffset++;
+
+        if (first.tokenIndex === last.tokenIndex) {
+            addRange(lastToken, startOffset, endOffset);
+        } else {
+            addRange(firstToken, startOffset, firstToken.raw.length);
+            for (let index = first.tokenIndex + 1; index < last.tokenIndex; index++) {
+                addRange(tokens[index], 0, tokens[index].raw.length);
+            }
+            addRange(lastToken, 0, endOffset);
+        }
+
+        let following = last.tokenIndex + 1;
+        while (following < tokens.length) {
+            const raw = tokens[following].raw;
+            let index = 0;
+            while (index < raw.length && isTrailing(raw[index])) index++;
+            if (index > 0) addRange(tokens[following], 0, index);
+            if (index < raw.length) break;
+            following++;
+        }
+
+        keyPosition = keyEnd;
+        removed++;
+        return true;
+    };
+
+    for (let index = 0; index < fragments.length; index++) {
+        const fragmentKey = titleKey(fragments[index]);
+        if (matchFragment(fragmentKey)) continue;
+        if (index === 0 && isNumericTitle(fragments[0])) continue;
+        break;
+    }
+
+    if (removals.length === 0) return { html, removed: 0 };
+
+    const merged = [];
+    for (const range of removals.sort((left, right) => left.start - right.start)) {
+        const previous = merged[merged.length - 1];
+        if (previous && range.start <= previous.end) {
+            previous.end = Math.max(previous.end, range.end);
+        } else {
+            merged.push({ ...range });
+        }
+    }
+
+    let output = html;
+    for (let index = merged.length - 1; index >= 0; index--) {
+        const { start, end } = merged[index];
+        output = output.slice(0, start) + output.slice(end);
+    }
+
+    return { html: output, removed };
 };
 
 export const flattenToc = (nodes, depth = 1) =>

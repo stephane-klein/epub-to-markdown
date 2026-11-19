@@ -7,6 +7,7 @@ import { extractHeadings } from "./headings.js";
 import { bookSession, createModel, estimateCost, generateOnce, metricsLine, parseRetryDelays } from "./llm.js";
 import { DEFAULT_REASONING, resolveApiKey, resolveConfigPath, resolveSettings } from "./llm-config.js";
 import { loadPricing } from "./pricing.js";
+import { enrichTitles, extractLeads } from "./title.js";
 import { annotateToc, extractMetadata, extractToc } from "./toc.js";
 import { buildDossier, parseTocYaml, positionIndex, toHrefToc, validateToc } from "./toc-dossier.js";
 
@@ -96,6 +97,10 @@ export const runGenerateToc = async ({ epubPath, llm = false, cli = {} }) => {
         );
     }
 
+    const hrefToc = toHrefToc(reviewed, idToHref);
+    const leads = extractLeads(epub, hrefToc);
+    const enriched = enrichTitles(hrefToc, leads);
+
     const cost = estimateCost(pricing?.priceAt(settings.model), result.usage);
     const frontmatter = {
         title,
@@ -109,11 +114,16 @@ export const runGenerateToc = async ({ epubPath, llm = false, cli = {} }) => {
             estimated_cost_usd: cost === null ? null : Number(cost.toFixed(6)),
             finish_reason: result.finishReason,
         },
-        toc: annotateToc(toHrefToc(reviewed, idToHref)),
+        toc: annotateToc(enriched.toc),
     };
     writeFileSync(outputPath, stringify(frontmatter, { lineWidth: 0 }));
     if (ensureBookTitle(bookConfigPath, title)) {
         console.log(`Title written to ${bookConfigPath}`);
+    }
+
+    if (enriched.enriched > 0 || enriched.skipped > 0) {
+        const skipped = enriched.skipped > 0 ? ` (${enriched.skipped} numeric titles left as is)` : "";
+        console.log(`Titles enriched: ${enriched.enriched}${skipped}`);
     }
 
     console.log(`TOC reviewed written to ${outputPath}`);
