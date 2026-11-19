@@ -142,7 +142,9 @@ $ epub-to-markdown generate-toc contents/my-book/my-book.epub --llm
 The deterministic table of contents is always written to `toc.raw.yaml`, and the
 reviewed one to `toc.yaml`. The reviewed tree is validated before being written:
 every `id` must reference a known heading, entries cannot be duplicated and they
-must follow the reading order. On failure `toc.yaml` is left untouched.
+must follow the reading order. The reading order comes from the navigation
+document, not from the spine, because some EPUBs declare a spine that differs
+from the logical order. On failure `toc.yaml` is left untouched.
 
 When `generate-toc --llm` creates `config.yaml`, the model also proposes
 `max_split_depth`: the depth whose entries make coherent reading units, usually

@@ -33,6 +33,21 @@ test("discoverSections ignores anchors that are not section anchors", () => {
     assert.equal(discoverSections(fake).size, 0);
 });
 
+test("discoverSections pairs anchors placed inside the numbered block", () => {
+    const fake = {
+        spineHrefs: ["a.xhtml"],
+        readText: () =>
+            '<div class="niv1tit"><a id="n1"></a>1</div><div class="fmp-j"><b>One.</b> Body.</div>' +
+            '<div class="niv1tit"><a id="n2"></a>2</div><div class="fmp-j"><b>Two.</b> Body.</div>' +
+            '<div class="niv1tit"><a id="n3"></a>CENSURE</div><div class="fmp-j">index</div>',
+    };
+
+    assert.deepEqual(discoverSections(fake).get("a.xhtml"), [
+        { anchor: "n1", number: "1" },
+        { anchor: "n2", number: "2" },
+    ]);
+});
+
 test("expandToc adds the sections under a childless document entry", () => {
     const toc = [
         {
@@ -81,4 +96,17 @@ test("expanded sections are enriched from their bold lead", () => {
     const enriched = enrichTitles(expanded.toc, leads);
 
     assert.equal(enriched.toc[0].children[0].title, "1 - One");
+});
+
+test("sections with an inside anchor are enriched from their bold lead", () => {
+    const fake = {
+        spineHrefs: ["a.xhtml"],
+        readText: () =>
+            '<div class="niv1tit"><a id="n1"></a>1</div><div class="fmp-j"><b>Une éducation.</b> Body.</div>',
+    };
+    const sections = discoverSections(fake);
+    const expanded = expandToc([{ title: "Chapter", href: "a.xhtml" }], sections);
+    const enriched = enrichTitles(expanded.toc, extractLeads(fake, expanded.toc));
+
+    assert.equal(enriched.toc[0].children[0].title, "1 - Une éducation");
 });

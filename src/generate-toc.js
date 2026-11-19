@@ -10,7 +10,7 @@ import { loadPricing } from "./pricing.js";
 import { discoverSections, expandToc } from "./sections.js";
 import { enrichTitles, extractLeads } from "./title.js";
 import { annotateToc, extractMetadata, extractToc } from "./toc.js";
-import { buildDossier, parseTocYaml, positionIndex, resolveSplitDepth, toHrefToc, validateToc } from "./toc-dossier.js";
+import { buildDossier, parseTocYaml, resolveSplitDepth, toHrefToc, validateToc } from "./toc-dossier.js";
 
 const DEFAULT_CEILING = 32768;
 
@@ -61,7 +61,6 @@ export const runGenerateToc = async ({ epubPath, llm = false, cli = {} }) => {
         toc,
         headings,
         metadata,
-        positionOf: positionIndex(epub),
     });
 
     const session = bookSession(settings.session, resolve(epubPath));

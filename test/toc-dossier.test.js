@@ -19,15 +19,11 @@ const toc = [
     { title: "Chapter Two", href: "a.xhtml#two" },
 ];
 
-const positions = { "a.xhtml": -1, "a.xhtml#one": 10, "a.xhtml#two": 20, "a.xhtml#cover": 5 };
-const positionOf = (href) => positions[href] ?? null;
-
 const { idToHref, orderOf, system, prompt } = buildDossier({
     title: "Book",
     toc,
     headings,
     metadata: { title: "Book", creator: "Someone" },
-    positionOf,
 });
 
 test("buildDossier assigns short ids to anchored headings", () => {
@@ -88,6 +84,27 @@ test("validateToc rejects an id out of reading order", () => {
     assert.match(errors.join("\n"), /out of reading order/);
 });
 
+test("buildDossier follows the navigation order, not the spine", () => {
+    const navToc = [
+        { title: "Introduction", href: "late.xhtml#intro" },
+        { title: "Part", href: "early.xhtml" },
+    ];
+    const dossier = buildDossier({ title: "Book", toc: navToc, headings: [], metadata: {} });
+
+    assert.ok(dossier.orderOf(1) < dossier.orderOf(2));
+    assert.deepEqual(
+        validateToc(
+            [
+                { id: 1, title: "Introduction" },
+                { id: 2, title: "Part" },
+            ],
+            dossier.idToHref,
+            dossier.orderOf,
+        ),
+        [],
+    );
+});
+
 test("validateToc rejects a missing title and a non-list children value", () => {
     const errors = validateToc([{ id: 1, children: "nope" }], idToHref, orderOf);
     assert.match(errors.join("\n"), /missing title/);
@@ -129,7 +146,7 @@ test("validateToc accepts a document-level parent placed before its anchored chi
             children: [{ title: "Section", href: "a.xhtml#one" }],
         },
     ];
-    const dossier = buildDossier({ title: "Book", toc: docToc, headings, metadata: {}, positionOf });
+    const dossier = buildDossier({ title: "Book", toc: docToc, headings, metadata: {} });
 
     assert.equal(dossier.idToHref.get(3), "a.xhtml");
     const nodes = [{ id: 3, title: "Introduction", children: [{ id: 1, title: "Section" }] }];

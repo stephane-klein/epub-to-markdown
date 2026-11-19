@@ -21,8 +21,9 @@ const SYSTEM = [
     '- Merge headings that form a single title into one entry (for example "LIFE AND WRITINGS" + "OF" + "DR. ADAM SMITH").',
     '- Write every `title` in sentence case, but keep proper nouns, acronyms and the book language, and start every word of a proper noun with a capital letter; join a numbered label and its heading with " - " (for example "CHAP. I." + "OF THE DIVISION OF LABOUR." becomes "Chap. I - Of the division of labour"); drop trailing periods.',
     "- Drop navigation artifacts such as title pages, bookplates, printing notices and duplicated entries.",
+    "- Do not drop a nested entry that points to a distinct anchor; drop only title pages, printing notices and entries that duplicate another href.",
     "- Keep the hierarchy meaningful for a reader.",
-    "- Set `max_split_depth` to the depth whose entries make coherent reading units, usually the chapter level rather than the part or the section level; depth 1 is the top level.",
+    "- Set `max_split_depth` to the depth whose entries make coherent reading units, usually the chapter level rather than the part or the section level; keep the deeper entries even when the split stops above them; depth 1 is the top level.",
     "- Do not set `max_split_depth` deeper than the returned TOC, and use 2 when the structure is unclear.",
     "- Never return an empty `toc`.",
     "- Do not add any commentary, explanation or code fence around the YAML.",
@@ -123,15 +124,31 @@ const buildPrompt = ({ title, toc, headings, metadata, hrefToId, idToHref, title
     return lines.join("\n");
 };
 
-export const buildDossier = ({ title, toc, headings, metadata = {}, positionOf }) => {
+const orderOfHref = (nodes) => {
+    const order = new Map();
+    const visit = (list) => {
+        for (const node of list ?? []) {
+            if (typeof node?.href === "string" && !order.has(node.href)) {
+                order.set(node.href, order.size);
+            }
+            visit(node?.children);
+        }
+    };
+    visit(nodes);
+    return order;
+};
+
+export const buildDossier = ({ title, toc, headings, metadata = {} }) => {
     const { idToHref, hrefToId, titleByHref } = buildAnchors({ toc, headings });
+    const orderByHref = orderOfHref(toc);
 
     return {
         idToHref,
         orderOf: (id) => {
             const href = idToHref.get(id);
-            if (href === undefined || !positionOf) return null;
-            return positionOf(href) ?? null;
+            if (href === undefined) return null;
+            const order = orderByHref.get(href);
+            return order === undefined ? null : order;
         },
         system: SYSTEM,
         prompt: buildPrompt({ title, toc, headings, metadata, hrefToId, idToHref, titleByHref }),

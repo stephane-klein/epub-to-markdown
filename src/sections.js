@@ -1,5 +1,11 @@
-const SECTION_ANCHOR = /<a\b[^>]*\bid="(niv\d+)"[^>]*>/gi;
-const SECTION_TITLE = /<div class="[^"]*\bniv1tit\b[^"]*">\s*(\d+)\s*<\/div>/gi;
+const SECTION_ANCHOR = /<a\b[^>]*\bid="((?:niv|n)\d+)"[^>]*>/gi;
+const SECTION_TITLE = /<div class="[^"]*\bniv1tit\b[^"]*">([\s\S]*?)<\/div>/gi;
+
+const plainText = (html) =>
+    html
+        .replace(/<[^>]*>/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
 
 // Some EPUBs list only the chapter files in their navigation document, while
 // each chapter contains numbered sections with their own anchors. This finds
@@ -16,16 +22,21 @@ export const discoverSections = (epub) => {
         if (anchors.length === 0) continue;
 
         const blocks = [...html.matchAll(SECTION_TITLE)].map((match) => ({
-            number: match[1],
-            index: match.index,
+            number: plainText(match[1]),
+            start: match.index,
+            end: match.index + match[0].length,
         }));
         if (blocks.length === 0) continue;
 
         const found = [];
         const used = new Set();
         for (const block of blocks) {
-            const anchor = anchors.findLast((candidate) => candidate.index < block.index && !used.has(candidate.id));
-            if (!anchor) continue;
+            const inside = anchors.find(
+                (candidate) => candidate.index >= block.start && candidate.index < block.end && !used.has(candidate.id),
+            );
+            const before = anchors.findLast((candidate) => candidate.index < block.start && !used.has(candidate.id));
+            const anchor = inside ?? before;
+            if (!anchor || !/^\d+$/.test(block.number)) continue;
             used.add(anchor.id);
             found.push({ anchor: anchor.id, number: block.number });
         }
