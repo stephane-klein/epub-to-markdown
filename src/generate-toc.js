@@ -1,7 +1,7 @@
 import { writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { stringify } from "yaml";
-import { ensureBookTitle, loadProjectConfig } from "./book-config.js";
+import { DEFAULT_BOOK_MAX_SPLIT_DEPTH, ensureBookConfig, loadProjectConfig } from "./book-config.js";
 import { readEpub } from "./epub.js";
 import { extractHeadings } from "./headings.js";
 import { bookSession, createModel, estimateCost, generateOnce, metricsLine, parseRetryDelays } from "./llm.js";
@@ -9,12 +9,23 @@ import { DEFAULT_REASONING, resolveApiKey, resolveConfigPath, resolveSettings } 
 import { loadPricing } from "./pricing.js";
 import { enrichTitles, extractLeads } from "./title.js";
 import { annotateToc, extractMetadata, extractToc } from "./toc.js";
-import { buildDossier, parseTocYaml, positionIndex, toHrefToc, validateToc } from "./toc-dossier.js";
+import { buildDossier, parseTocYaml, positionIndex, resolveSplitDepth, toHrefToc, validateToc } from "./toc-dossier.js";
 
 const DEFAULT_CEILING = 32768;
 
 const writeRawToc = (outputPath, { title, toc }) => {
     writeFileSync(outputPath, stringify({ title, toc }, { lineWidth: 0 }));
+};
+
+const syncBookConfig = (bookConfigPath, title, maxSplitDepth) => {
+    const status = ensureBookConfig(bookConfigPath, title, { maxSplitDepth });
+    if (status === "created") {
+        console.log(
+            `config.yaml created at ${bookConfigPath} (title, max_split_depth: ${maxSplitDepth ?? DEFAULT_BOOK_MAX_SPLIT_DEPTH})`,
+        );
+    } else if (status === "updated") {
+        console.log(`Title written to ${bookConfigPath}`);
+    }
 };
 
 export const runGenerateToc = async ({ epubPath, llm = false, cli = {} }) => {
@@ -26,9 +37,7 @@ export const runGenerateToc = async ({ epubPath, llm = false, cli = {} }) => {
 
     if (!llm) {
         writeRawToc(outputPath, { title, toc });
-        if (ensureBookTitle(bookConfigPath, title)) {
-            console.log(`Title written to ${bookConfigPath}`);
-        }
+        syncBookConfig(bookConfigPath, title);
         console.log(`TOC written to ${outputPath}`);
         return;
     }
@@ -89,17 +98,19 @@ export const runGenerateToc = async ({ epubPath, llm = false, cli = {} }) => {
         );
     }
 
-    const reviewed = parseTocYaml(result.text);
-    const errors = validateToc(reviewed, idToHref, orderOf);
+    const review = parseTocYaml(result.text);
+    const errors = validateToc(review.toc, idToHref, orderOf);
     if (errors.length > 0) {
         throw new Error(
             `LLM table of contents is invalid:\n${errors.join("\n")}\nThe raw table of contents is kept in ${rawPath}`,
         );
     }
 
-    const hrefToc = toHrefToc(reviewed, idToHref);
+    const hrefToc = toHrefToc(review.toc, idToHref);
     const leads = extractLeads(epub, hrefToc);
     const enriched = enrichTitles(hrefToc, leads);
+    const annotated = annotateToc(enriched.toc);
+    const splitDepth = resolveSplitDepth(review.maxSplitDepth, annotated, DEFAULT_BOOK_MAX_SPLIT_DEPTH);
 
     const cost = estimateCost(pricing?.priceAt(settings.model), result.usage);
     const frontmatter = {
@@ -114,12 +125,10 @@ export const runGenerateToc = async ({ epubPath, llm = false, cli = {} }) => {
             estimated_cost_usd: cost === null ? null : Number(cost.toFixed(6)),
             finish_reason: result.finishReason,
         },
-        toc: annotateToc(enriched.toc),
+        toc: annotated,
     };
     writeFileSync(outputPath, stringify(frontmatter, { lineWidth: 0 }));
-    if (ensureBookTitle(bookConfigPath, title)) {
-        console.log(`Title written to ${bookConfigPath}`);
-    }
+    syncBookConfig(bookConfigPath, title, splitDepth);
 
     if (enriched.enriched > 0 || enriched.skipped > 0) {
         const skipped = enriched.skipped > 0 ? ` (${enriched.skipped} numeric titles left as is)` : "";

@@ -9,10 +9,10 @@ const SYSTEM = [
     "- the current TOC parsed from the EPUB navigation document, as a nested list of entries with an `id` and optional `children` (ids only, no titles);",
     "- every heading of the book in reading order, each shown with an `[id]` when it can start a section, or `-` otherwise, followed by its level and its text.",
     "",
-    "Return a corrected TOC.",
+    "Return a corrected TOC and the split depth.",
     "",
     "Rules:",
-    "- Output YAML only, with a single top-level `toc:` key holding a list of entries.",
+    "- Output YAML only, with two top-level keys: `max_split_depth` (an integer) and `toc` (a list of entries).",
     "- An entry is a mapping with an integer `id`, a `title` and, when needed, a `children` list of entries.",
     "- Always wrap every `title` in double quotes.",
     "- Use only ids that appear in the input (current TOC or headings). Never invent, translate or reformat an id.",
@@ -22,6 +22,8 @@ const SYSTEM = [
     '- Write every `title` in sentence case, but keep proper nouns, acronyms and the book language, and start every word of a proper noun with a capital letter; join a numbered label and its heading with " - " (for example "CHAP. I." + "OF THE DIVISION OF LABOUR." becomes "Chap. I - Of the division of labour"); drop trailing periods.',
     "- Drop navigation artifacts such as title pages, bookplates, printing notices and duplicated entries.",
     "- Keep the hierarchy meaningful for a reader.",
+    "- Set `max_split_depth` to the depth whose entries make coherent reading units, usually the chapter level rather than the part or the section level; depth 1 is the top level.",
+    "- Do not set `max_split_depth` deeper than the returned TOC, and use 2 when the structure is unclear.",
     "- Never return an empty `toc`.",
     "- Do not add any commentary, explanation or code fence around the YAML.",
 ].join("\n");
@@ -159,7 +161,17 @@ export const parseTocYaml = (text) => {
     }
     const toc = Array.isArray(parsed) ? parsed : parsed?.toc;
     if (!Array.isArray(toc)) throw new Error("LLM output does not contain a `toc` list");
-    return toc;
+    return { toc, maxSplitDepth: Array.isArray(parsed) ? undefined : parsed?.max_split_depth };
+};
+
+export const tocDepth = (nodes = []) =>
+    nodes.reduce((max, node) => Math.max(max, 1 + tocDepth(Array.isArray(node?.children) ? node.children : [])), 0);
+
+export const resolveSplitDepth = (value, toc, fallback) => {
+    const depth = tocDepth(toc);
+    if (depth < 1) return fallback;
+    const candidate = Number.isInteger(value) && value >= 1 ? value : fallback;
+    return Math.max(1, Math.min(candidate, depth));
 };
 
 export const validateToc = (nodes, idToHref, orderOf) => {

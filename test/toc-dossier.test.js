@@ -1,6 +1,14 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { buildDossier, parseTocYaml, positionIndex, toHrefToc, validateToc } from "../src/toc-dossier.js";
+import {
+    buildDossier,
+    parseTocYaml,
+    positionIndex,
+    resolveSplitDepth,
+    tocDepth,
+    toHrefToc,
+    validateToc,
+} from "../src/toc-dossier.js";
 
 const headings = [
     { order: 0, href: "a.xhtml", anchor: "one", level: 2, text: "Chapter One" },
@@ -29,6 +37,7 @@ test("buildDossier assigns short ids to anchored headings", () => {
 
 test("buildDossier builds a prompt that uses ids and never leaks hrefs", () => {
     assert.match(system, /table of contents/i);
+    assert.match(system, /max_split_depth/);
     assert.match(prompt, /Headings in reading order/);
     assert.match(prompt, /\[1\] h2 {2}Chapter One/);
     assert.match(prompt, /Author: Someone/);
@@ -127,14 +136,56 @@ test("validateToc accepts a document-level parent placed before its anchored chi
     assert.deepEqual(validateToc(nodes, dossier.idToHref, dossier.orderOf), []);
 });
 
-test("parseTocYaml strips code fences and reads the toc key", () => {
-    assert.deepEqual(parseTocYaml("```yaml\ntoc:\n  - id: 1\n    title: One\n```"), [{ id: 1, title: "One" }]);
+test("parseTocYaml strips code fences and reads the toc and the split depth", () => {
+    assert.deepEqual(parseTocYaml("```yaml\nmax_split_depth: 2\ntoc:\n  - id: 1\n    title: One\n```"), {
+        toc: [{ id: 1, title: "One" }],
+        maxSplitDepth: 2,
+    });
 });
 
 test("parseTocYaml repairs unquoted titles containing a colon", () => {
-    assert.deepEqual(parseTocYaml("toc:\n  - id: 1\n    title: FOOTNOTES:\n"), [{ id: 1, title: "FOOTNOTES:" }]);
+    assert.deepEqual(parseTocYaml("toc:\n  - id: 1\n    title: FOOTNOTES:\n"), {
+        toc: [{ id: 1, title: "FOOTNOTES:" }],
+        maxSplitDepth: undefined,
+    });
 });
 
 test("parseTocYaml throws when the output has no toc list", () => {
     assert.throws(() => parseTocYaml("title: Book"), /does not contain a `toc` list/);
+});
+
+const deepToc = [
+    {
+        title: "Part",
+        children: [
+            {
+                title: "Chapter",
+                children: [{ title: "Section" }],
+            },
+        ],
+    },
+];
+
+test("tocDepth returns the deepest entry level", () => {
+    assert.equal(tocDepth([]), 0);
+    assert.equal(tocDepth([{ title: "One" }]), 1);
+    assert.equal(tocDepth(deepToc), 3);
+});
+
+test("resolveSplitDepth keeps a valid depth", () => {
+    assert.equal(resolveSplitDepth(2, deepToc, 2), 2);
+});
+
+test("resolveSplitDepth falls back when the depth is invalid", () => {
+    assert.equal(resolveSplitDepth(undefined, deepToc, 2), 2);
+    assert.equal(resolveSplitDepth("2", deepToc, 2), 2);
+    assert.equal(resolveSplitDepth(0, deepToc, 2), 2);
+});
+
+test("resolveSplitDepth clamps a depth deeper than the toc", () => {
+    assert.equal(resolveSplitDepth(5, deepToc, 2), 3);
+});
+
+test("resolveSplitDepth clamps the fallback to the toc depth", () => {
+    assert.equal(resolveSplitDepth(undefined, [{ title: "One" }], 2), 1);
 });

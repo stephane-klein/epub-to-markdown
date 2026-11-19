@@ -85,6 +85,8 @@ $ epub-to-markdown doctor
 $ epub-to-markdown generate-toc contents/my-book/my-book.epub
 ```
 
+The command also creates `config.yaml` next to the EPUB when it is missing.
+
 **5. Generate the Markdown files**:
 
 ```sh
@@ -101,8 +103,10 @@ $ epub-to-markdown generate-toc contents/my-book/my-book.epub
 
 The command writes a `toc.yaml` file next to the EPUB file. It reads the EPUB 3
 navigation document when present and falls back to the EPUB 2 NCX file, so it
-works with both EPUB versions. When a `config.yaml` already exists next to the
-EPUB and has no `title`, the command also writes the book title into it.
+works with both EPUB versions. When `config.yaml` is missing next to the EPUB,
+the command creates it with the book title and `max_split_depth: 2` (with
+`--llm`, the model proposes the depth; see below). When the file exists without
+a `title`, the command writes the title into it.
 
 Each entry has a `title`, a `slug` derived from the title, a `path` made of the
 parent slugs and the entry slug, and the `href` to the source document:
@@ -139,6 +143,12 @@ The deterministic table of contents is always written to `toc.raw.yaml`, and the
 reviewed one to `toc.yaml`. The reviewed tree is validated before being written:
 every `id` must reference a known heading, entries cannot be duplicated and they
 must follow the reading order. On failure `toc.yaml` is left untouched.
+
+When `generate-toc --llm` creates `config.yaml`, the model also proposes
+`max_split_depth`: the depth whose entries make coherent reading units, usually
+the chapter level. The value is bounded by the depth of the reviewed tree. When
+it is missing or invalid, the command uses `2`, also bounded by that depth. An
+existing `max_split_depth` is never overwritten.
 
 After the review, the command also promotes the bold lead of numbered sections.
 When the reviewed title is only a number and the section starts with a bold
@@ -186,7 +196,9 @@ it).
 
 ## Generate the Markdown files
 
-Add a `config.yaml` next to the EPUB to control the split granularity:
+`generate-toc` creates a `config.yaml` next to the EPUB when it is missing, with
+the book title and `max_split_depth: 2`. With `--llm`, the model proposes the
+split depth instead; see above. Edit the file to control the split granularity:
 
 ```yaml
 title: Principles of Political Economy
@@ -197,8 +209,10 @@ max_line_length: 120
 `title` is the book title at the root of the tree. `generate-markdown` copies it
 from the `title` of `toc.yaml` when the key is missing or empty, and
 `generate-toc` does the same when `config.yaml` already exists. A non-empty
-value is never overwritten. Downstream tools use this value as the first segment
-of every breadcrumb, so keep it unchanged once the corpus is indexed.
+value is never overwritten. The same rule applies to `max_split_depth`: later
+runs never replace a value that is already present. Downstream tools use the
+title as the first segment of every breadcrumb, so keep it unchanged once the
+corpus is indexed.
 
 `max_line_length` hard wraps paragraphs at the given column (default `120`). Set
 it to `0` to keep each paragraph on a single line. Code blocks, tables and

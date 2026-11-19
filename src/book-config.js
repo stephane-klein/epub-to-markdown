@@ -1,5 +1,5 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
-import { isMap, parse, parseDocument } from "yaml";
+import { isMap, parse, parseDocument, stringify } from "yaml";
 
 export const loadProjectConfig = (configPath) => {
     if (!existsSync(configPath)) return {};
@@ -44,4 +44,17 @@ export const ensureBookTitle = (configPath, title) => {
 
     writeFileSync(configPath, document.toString({ lineWidth: 0 }));
     return true;
+};
+
+export const DEFAULT_BOOK_MAX_SPLIT_DEPTH = 2;
+
+export const ensureBookConfig = (configPath, title, { maxSplitDepth = DEFAULT_BOOK_MAX_SPLIT_DEPTH } = {}) => {
+    if (typeof title !== "string" || title.trim() === "") return false;
+    if (existsSync(configPath)) {
+        return ensureBookTitle(configPath, title) ? "updated" : false;
+    }
+
+    const depth = Number.isInteger(maxSplitDepth) && maxSplitDepth >= 1 ? maxSplitDepth : DEFAULT_BOOK_MAX_SPLIT_DEPTH;
+    writeFileSync(configPath, stringify({ title, max_split_depth: depth }, { lineWidth: 0 }));
+    return "created";
 };

@@ -4,7 +4,13 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
 import { parse } from "yaml";
-import { ensureBookTitle, loadBookConfig, loadProjectConfig } from "../src/book-config.js";
+import {
+    DEFAULT_BOOK_MAX_SPLIT_DEPTH,
+    ensureBookConfig,
+    ensureBookTitle,
+    loadBookConfig,
+    loadProjectConfig,
+} from "../src/book-config.js";
 
 const writeConfig = (content) => {
     const path = join(mkdtempSync(join(tmpdir(), "epub-to-markdown-")), "config.yaml");
@@ -135,4 +141,40 @@ test("ensureBookTitle rejects a non-string title", () => {
 test("ensureBookTitle rejects a config that is not a YAML mapping", () => {
     const path = writeConfig("- one\n- two\n");
     assert.throws(() => ensureBookTitle(path, "A Book"), /must contain a YAML mapping/);
+});
+
+test("ensureBookConfig creates config.yaml with the title and the default split depth", () => {
+    const path = join(mkdtempSync(join(tmpdir(), "epub-to-markdown-")), "config.yaml");
+    assert.equal(ensureBookConfig(path, "A Book"), "created");
+    assert.equal(readFileSync(path, "utf8"), `title: A Book\nmax_split_depth: ${DEFAULT_BOOK_MAX_SPLIT_DEPTH}\n`);
+});
+
+test("ensureBookConfig writes the proposed split depth", () => {
+    const path = join(mkdtempSync(join(tmpdir(), "epub-to-markdown-")), "config.yaml");
+    assert.equal(ensureBookConfig(path, "A Book", { maxSplitDepth: 3 }), "created");
+    assert.deepEqual(parse(readFileSync(path, "utf8")), { title: "A Book", max_split_depth: 3 });
+});
+
+test("ensureBookConfig falls back to the default split depth", () => {
+    const path = join(mkdtempSync(join(tmpdir(), "epub-to-markdown-")), "config.yaml");
+    assert.equal(ensureBookConfig(path, "A Book", { maxSplitDepth: 0 }), "created");
+    assert.equal(parse(readFileSync(path, "utf8")).max_split_depth, DEFAULT_BOOK_MAX_SPLIT_DEPTH);
+});
+
+test("ensureBookConfig does not create config.yaml without a title", () => {
+    const path = join(mkdtempSync(join(tmpdir(), "epub-to-markdown-")), "config.yaml");
+    assert.equal(ensureBookConfig(path, "   "), false);
+    assert.equal(existsSync(path), false);
+});
+
+test("ensureBookConfig updates an existing file without touching max_split_depth", () => {
+    const path = writeConfig("max_split_depth: 4\n");
+    assert.equal(ensureBookConfig(path, "A Book", { maxSplitDepth: 2 }), "updated");
+    assert.deepEqual(parse(readFileSync(path, "utf8")), { title: "A Book", max_split_depth: 4 });
+});
+
+test("ensureBookConfig keeps an existing title", () => {
+    const path = writeConfig("title: Keep me\nmax_split_depth: 4\n");
+    assert.equal(ensureBookConfig(path, "A Book", { maxSplitDepth: 2 }), false);
+    assert.equal(readFileSync(path, "utf8"), "title: Keep me\nmax_split_depth: 4\n");
 });
