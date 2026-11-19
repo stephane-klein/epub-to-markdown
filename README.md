@@ -158,6 +158,13 @@ contain text are left untouched, as are sections without a bold lead. Because
 the subtitle is part of the title, the generated `slug` and `path` include it
 (`1-introduction/01-1-les-deux-xixe-siecles`).
 
+Some navigation documents list only the chapter files, while those files contain
+numbered sections with their own anchors. After the review, the command also
+discovers those sections and adds them as children of the matching chapter
+entry. The discovery targets the `nivNN` anchors followed by a `div.niv1tit`
+block, a structure found in some Hachette EPUBs. The sections then become their
+own Markdown files at the depth chosen by `max_split_depth`.
+
 The model, endpoint and API key come from the command line flags (`--model`,
 `--endpoint`, `--api-key`, `--session`, `--retry-delays`,
 `--max-output-tokens`), the environment, or the project configuration file

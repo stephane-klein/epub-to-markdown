@@ -7,6 +7,7 @@ import { extractHeadings } from "./headings.js";
 import { bookSession, createModel, estimateCost, generateOnce, metricsLine, parseRetryDelays } from "./llm.js";
 import { DEFAULT_REASONING, resolveApiKey, resolveConfigPath, resolveSettings } from "./llm-config.js";
 import { loadPricing } from "./pricing.js";
+import { discoverSections, expandToc } from "./sections.js";
 import { enrichTitles, extractLeads } from "./title.js";
 import { annotateToc, extractMetadata, extractToc } from "./toc.js";
 import { buildDossier, parseTocYaml, positionIndex, resolveSplitDepth, toHrefToc, validateToc } from "./toc-dossier.js";
@@ -107,8 +108,10 @@ export const runGenerateToc = async ({ epubPath, llm = false, cli = {} }) => {
     }
 
     const hrefToc = toHrefToc(review.toc, idToHref);
-    const leads = extractLeads(epub, hrefToc);
-    const enriched = enrichTitles(hrefToc, leads);
+    const sections = discoverSections(epub);
+    const expanded = expandToc(hrefToc, sections);
+    const leads = extractLeads(epub, expanded.toc);
+    const enriched = enrichTitles(expanded.toc, leads);
     const annotated = annotateToc(enriched.toc);
     const splitDepth = resolveSplitDepth(review.maxSplitDepth, annotated, DEFAULT_BOOK_MAX_SPLIT_DEPTH);
 
@@ -130,6 +133,9 @@ export const runGenerateToc = async ({ epubPath, llm = false, cli = {} }) => {
     writeFileSync(outputPath, stringify(frontmatter, { lineWidth: 0 }));
     syncBookConfig(bookConfigPath, title, splitDepth);
 
+    if (expanded.added > 0) {
+        console.log(`Sections added: ${expanded.added}`);
+    }
     if (enriched.enriched > 0 || enriched.skipped > 0) {
         const skipped = enriched.skipped > 0 ? ` (${enriched.skipped} numeric titles left as is)` : "";
         console.log(`Titles enriched: ${enriched.enriched}${skipped}`);
