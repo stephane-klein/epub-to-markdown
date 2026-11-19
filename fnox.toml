@@ -1,0 +1,6 @@
+[providers.gopass]
+type = "password-store"
+store_dir = "~/.local/share/gopass/stores/root"
+
+[secrets]
+OPENAI_API_KEY = { provider = "gopass", value = "deepseek.com/youtube-feed-to-markdown/apikey" }
